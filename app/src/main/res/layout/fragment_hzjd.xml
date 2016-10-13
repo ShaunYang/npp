@@ -1,0 +1,93 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gv"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="clip_horizontal"
+        android:background="@color/common_bg_color"
+        >
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/common_topbar_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+          <!--  <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/back"
+                android:background="@drawable/back"/>-->
+
+
+
+            <Button
+                android:id="@+id/ntitle"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:textSize="17dp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/spinner_selector"
+                android:text="所有地区"/>
+
+         <!--  <TextView
+                android:id="@+id/selector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="22dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/spinner_selector"
+                android:text=""/>-->
+
+
+
+
+        </RelativeLayout>
+
+        <com.zhuoyi.fauction.xlistview.XListView
+            android:id="@+id/all_recycle"
+            android:descendantFocusability= "blocksDescendants"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vMasker"
+        android:visibility="gone"
+        android:background="#e0000000"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
+
+    <!-- <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+         <ImageButton
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginBottom="32dp"
+             android:layout_marginTop="15dp"
+             android:layout_marginLeft="24dp"
+             android:layout_alignParentLeft="true"
+             android:background="@drawable/main_back"/>
+
+     </RelativeLayout>-->
+
+
+</RelativeLayout>

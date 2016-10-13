@@ -1,0 +1,126 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/common_topbar_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/back"
+            android:background="@drawable/back"/>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="22dp"
+            android:textColor="#FFFFFF"
+            android:text="出价记录"/>
+
+
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="10dp"
+
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+
+
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/price_record_icon"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/price_record"/>
+            <TextView
+                android:id="@+id/fauction_record"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/price_record_icon"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:text="拍卖记录|"/>
+            <TextView
+                android:id="@+id/remind"
+                android:layout_width="wrap_content"
+                android:layout_toRightOf="@id/fauction_record"
+                android:layout_height="wrap_content"
+                android:text="0人报名 出价0次"/>
+
+            <!--<TextView-->
+                <!--android:id="@+id/more_paimaijilu"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:text="全部>"/>-->
+        </RelativeLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="状态"
+            android:gravity="center"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="用户名"
+            android:gravity="center"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="时间"
+            android:gravity="center"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="价格"
+            android:gravity="center"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="数量"
+            android:gravity="center"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <com.zhuoyi.fauction.xlistview.XListView
+        android:id="@+id/paimairecycleview"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+
+        android:layout_height="wrap_content"></com.zhuoyi.fauction.xlistview.XListView>
+
+</LinearLayout>

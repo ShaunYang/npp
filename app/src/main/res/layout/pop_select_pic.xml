@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pop_layout"
+    android:layout_width="fill_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:layout_height="wrap_content">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content">
+       <Button
+           android:id="@+id/paizhao"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="拍照"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/xiangce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="从相册选择"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/price_comfirm"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/text_orange_name"
+        android:textColor="#FFFFFF"
+        android:textSize="18dp"
+        android:text="确   定"/>
+</LinearLayout>

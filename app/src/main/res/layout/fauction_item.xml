@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+
+    android:descendantFocusability= "blocksDescendants"
+
+    android:gravity="center"
+
+    android:background="@drawable/corners_bg" >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/top_item"
+            android:layout_width="wrap_content"
+
+            android:padding="10dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="精选优良玉米10000斤"
+                android:id="@+id/title" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/fauction_btn_color"
+                android:text="交易完成"
+                android:id="@+id/state" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            >
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="100dp"
+                android:background="@null"
+                android:id="@+id/title_img" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_marginLeft="5dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:text="成交时间:"
+                         />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:text="2016.05.15 12:00:00"
+                        android:id="@+id/time" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:text="成交价:"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:textColor="@color/fauction_btn_color"
+                        android:text="￥1.5/斤*5000"
+                        android:id="@+id/end_price" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:text="运费:"/>
+                    <TextView
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:textColor="@color/fauction_btn_color"
+                        android:text="￥800"
+                        android:id="@+id/express" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:text="成交总价:"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:id="@+id/total"
+                        android:textColor="@color/fauction_btn_color"
+                        android:text="￥7550.00"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:textSize="10dp"
+                        android:text=""
+                        android:id="@+id/yunfei_yongjing" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+        <RelativeLayout
+
+            android:layout_width="wrap_content"
+
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+
+                android:id="@+id/remind_time" />
+
+            <Button
+                android:id="@+id/pay"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:focusable = "false"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/fauction_state_btn"
+                android:textColor="@color/fauction_btn_color"
+                android:text="立即付款"/>
+
+            <!--<Button-->
+                <!--android:layout_toLeftOf="@id/second_btn"-->
+                <!--android:id="@+id/first_btn"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--android:background="@drawable/fauction_state_btn"-->
+                <!--android:textColor="@color/fauction_btn_color"-->
+                <!--android:text="查看物流"/>-->
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

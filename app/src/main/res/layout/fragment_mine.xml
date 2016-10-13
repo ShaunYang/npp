@@ -1,0 +1,349 @@
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_gray"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/bg_gray"
+
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/common_topbar_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="20dp"
+                android:textColor="#FFFFFF"
+                android:text="我的"/>
+
+
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:textColor="#ffffff"
+                android:background="@drawable/setting"
+                android:id="@+id/setting" />
+        </RelativeLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/common_topbar_bg"
+                android:orientation="vertical"
+                android:layout_weight="0.4">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="0.1"
+                    android:layout_height="0dp">
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1.9"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:layout_height="0dp">
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/mine_avator"
+                        android:layout_width="45dp"
+                        android:scaleType="fitCenter"
+                        app:riv_corner_radius="100dip"
+                        app:riv_border_width="1dip"
+                        app:riv_border_color="@color/common_topbar_bg"
+                        android:src="@drawable/avator_default"
+                        android:layout_marginBottom="10dp"
+                        android:layout_height="45dp" />
+                    <TextView
+                        android:id="@+id/username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textColor="#FFFFFF"
+                        android:text="亲，您还没登录呢？"/>
+                    <Button
+                        android:id="@+id/to_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/mine_rightlogin"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15dp"
+                        android:text="立即登录"/>
+                </LinearLayout>
+            </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+               >
+                <RelativeLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:orientation="horizontal"
+                    android:id="@+id/my_fauction">
+                    <ImageView
+                        android:id="@+id/logo_wpdd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/mine_wpdd"/>
+                    <TextView
+                        android:layout_toRightOf="@id/logo_wpdd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:layout_marginTop="-1dp"
+                        android:layout_marginLeft="5dp"
+                        android:text="我拍到的"/>
+                    <ImageView
+                        android:id="@+id/logo_arror_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/mine_arror"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/logo_arror_1"
+                        android:layout_marginRight="5dp"
+                        android:text="查看订单"/>
+
+
+                </RelativeLayout>
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:orientation="horizontal"
+                    android:id="@+id/myhave_fauction">
+                    <ImageView
+                        android:id="@+id/logo_wcpd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/mine_wcpd"/>
+                    <TextView
+                        android:layout_toRightOf="@id/logo_wcpd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+
+                        android:layout_marginLeft="5dp"
+                        android:text="我参拍的"/>
+
+                    <ImageView
+                        android:id="@+id/logo_arror_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/mine_arror"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:orientation="horizontal"
+                    android:id="@+id/to_wallet">
+                    <ImageView
+                        android:id="@+id/logo_wallet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/mine_wallet"/>
+                    <TextView
+                        android:layout_toRightOf="@id/logo_wallet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:layout_marginTop="-1dp"
+                        android:layout_marginLeft="5dp"
+                        android:text="我的钱包"/>
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/mine_arror"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:orientation="horizontal"
+                    android:id="@+id/mine_remind">
+                    <ImageView
+                        android:id="@+id/logo_remind"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/mine_remind"/>
+                    <TextView
+                        android:layout_toRightOf="@id/logo_remind"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:layout_marginTop="-1dp"
+                        android:layout_marginLeft="5dp"
+                        android:text="我的提醒"/>
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/mine_arror"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:orientation="horizontal"
+                    android:id="@+id/mine_sel_category">
+                    <ImageView
+                        android:id="@+id/logo_select"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:background="@drawable/mine_select"/>
+                    <TextView
+                        android:layout_toRightOf="@id/logo_select"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:layout_marginTop="-3dp"
+                        android:layout_marginLeft="5dp"
+                        android:text="我选择的品种"/>
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/mine_arror"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:orientation="horizontal"
+                    android:id="@+id/mine_bond">
+                    <ImageView
+                        android:id="@+id/logo_bond"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:background="@drawable/bond_detail"/>
+                    <TextView
+                        android:layout_toRightOf="@id/logo_bond"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:layout_marginTop="-1dp"
+                        android:layout_marginLeft="5dp"
+                        android:text="保证金明细"/>
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/mine_arror"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:orientation="horizontal"
+                    android:id="@+id/mine_pick">
+                    <ImageView
+                        android:id="@+id/logo_pick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:background="@drawable/mine_pick"/>
+                    <TextView
+                        android:layout_toRightOf="@id/logo_pick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:layout_marginTop="-3dp"
+                        android:layout_marginLeft="5dp"
+                        android:text="我的抵用劵"/>
+
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/mine_arror"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
+
+    <!-- <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+         <ImageButton
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginBottom="32dp"
+             android:layout_marginTop="15dp"
+             android:layout_marginLeft="24dp"
+             android:layout_alignParentLeft="true"
+             android:background="@drawable/main_back"/>
+
+     </RelativeLayout>-->
+
+
+</RelativeLayout>

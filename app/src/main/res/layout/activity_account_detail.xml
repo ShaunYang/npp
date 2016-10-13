@@ -1,0 +1,132 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/main"
+    android:layout_height="match_parent"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+
+        >
+        <RelativeLayout
+            android:id="@+id/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/common_topbar_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/back"
+                android:background="@drawable/back"/>
+
+
+                <TextView
+                    android:id="@+id/mounth_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp"
+                    android:text="2016年5月"/>
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/mounth_select"-->
+                    <!--android:layout_toRightOf="@id/mounth_title"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:layout_marginLeft="-100dp"-->
+                    <!--android:background="@drawable/spinner_nor"/>-->
+                <!--<Spinner-->
+                    <!--android:id="@+id/spinner_nav"-->
+
+                    <!--android:layout_width="160dp"-->
+                    <!--android:entries="@array/spinnername"-->
+                    <!--android:paddingRight="3dp"-->
+                    <!--style="@style/spinner_style"-->
+                    <!--android:layout_centerInParent="true"-->
+                    <!--android:dropDownHorizontalOffset="50dp"-->
+                    <!--android:dropDownVerticalOffset="50dp"-->
+                    <!--android:layout_height="30dp" />-->
+
+
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:id="@+id/price_sort"-->
+                <!--android:textColor="#ffffff"-->
+                <!--android:textSize="20dp"-->
+                <!--android:text="排序"/>-->
+        </RelativeLayout>
+        <!--<com.yintai.common.view.CommonTopBar
+            android:id="@+id/main_category"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/common_topbar_bg"
+            app:title_enable="true"
+            app:title_text="@string/myauction_title"
+            app:title_text_color="@color/white"
+            app:title_text_size="@dimen/huge_text_size" />-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <GridView
+                android:layout_marginTop="5dp"
+                android:id="@+id/gridview"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:numColumns="4"
+                android:background="#FFFFFF"
+                android:paddingBottom="20dp"
+                android:verticalSpacing="20dp"
+                android:horizontalSpacing="20dp"
+                android:gravity="center" />
+
+            <com.zhuoyi.fauction.xlistview.XListView
+                android:id="@+id/account_list"
+                android:descendantFocusability= "blocksDescendants"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+    <!-- <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+         <ImageButton
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginBottom="32dp"
+             android:layout_marginTop="15dp"
+             android:layout_marginLeft="24dp"
+             android:layout_alignParentLeft="true"
+             android:background="@drawable/main_back"/>
+
+     </RelativeLayout>-->
+
+
+</RelativeLayout>

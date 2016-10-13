@@ -1,0 +1,168 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/common_topbar_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/back"
+                android:background="@drawable/back"/>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="22dp"
+                android:textColor="#FFFFFF"
+                android:text="收货地址"/>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:text="完成"
+                android:id="@+id/add_finish" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/divider"
+            android:orientation="horizontal"
+           >
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="20dp"
+                android:layout_height="wrap_content"
+                android:hint="收件人"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:background="@null"
+                android:id="@+id/name"
+                android:textSize="18dp"
+                android:hint="输入收件人"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+               />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+
+            android:background="@drawable/divider"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="20dp"
+                android:layout_height="wrap_content"
+                android:hint="手机号"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:background="@null"
+                android:id="@+id/mobile"
+                android:textSize="18dp"
+                android:hint="输入手机号"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/divider"
+            android:padding="10dp"
+            android:id="@+id/area"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/szdq"
+                android:layout_width="wrap_content"
+                android:textSize="20dp"
+                android:layout_height="wrap_content"
+                android:hint="所在地区"/>
+            <TextView
+                android:id="@+id/sel_area"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/szdq"
+                android:textSize="18dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <ImageView
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:background="@drawable/mine_arror"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+
+            android:background="@drawable/divider"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="20dp"
+                android:layout_height="wrap_content"
+                android:hint="手机号"
+                android:text="详细地址"
+                 />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:background="@null"
+                android:textSize="18dp"
+                android:hint="输入详细地址"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/address_detail"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</RelativeLayout>

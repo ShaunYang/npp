@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/gv"
+
+
+    android:gravity="center"
+
+    android:background="@drawable/corners_bg" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            >
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="100dp"
+                android:src="@null"
+                android:id="@+id/title_img" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_marginLeft="5dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:text="精选优良玉米10000斤"
+                        android:id="@+id/title" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:text="成交价:"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:textColor="@color/fauction_btn_color"
+                        android:text="￥1.5/斤"
+                        android:id="@+id/cur_price" />
+
+                    <ImageView
+                        android:layout_marginLeft="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/price_up"
+                        android:id="@+id/price_state"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:text="剩余数量:"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:textColor="@color/fauction_btn_color"
+                        android:text="5000斤/10000斤"
+                        android:id="@+id/stock_num" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:text="结束时间："
+                        android:id="@+id/endtime_tx" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:textColor="@color/fauction_btn_color"
+                        android:text="1小时50分钟36秒"
+                        android:id="@+id/residual_time" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+       <!-- <LinearLayout
+
+            android:layout_width="wrap_content"
+
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textSize="12dp"
+                android:text="你出价："/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textSize="12dp"
+                android:text="￥1.55/斤"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:textSize="12dp"
+                android:text="数量"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:textSize="12dp"
+                android:text="5000斤"/>
+
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/remind_state_btn"
+                android:textColor="@color/black"
+                android:text="取消提醒"/>
+
+            <Button
+                android:id="@+id/pay"
+                android:layout_width="70dp"
+                android:layout_marginLeft="10dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/remind_state_btn"
+                android:textColor="@color/black"
+                android:text="立即付款"/>
+
+
+        </LinearLayout>-->
+    </LinearLayout>
+
+
+</RelativeLayout>

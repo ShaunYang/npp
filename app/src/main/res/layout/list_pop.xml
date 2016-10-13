@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+
+
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingTop="5dp"
+    android:background="@drawable/pop_selet" >
+    <TextView
+        android:id="@+id/low_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:textColor="@drawable/text_color_selector"
+        android:text="当前价从低到高"/>
+    <TextView
+        android:id="@+id/height_low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textSize="15dp"
+        android:textColor="@drawable/text_color_selector"
+        android:text="当前价从高到低"/>
+
+</LinearLayout>

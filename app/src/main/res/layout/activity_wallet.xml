@@ -1,0 +1,163 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#F2F2F2"
+
+
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/common_topbar_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/back"
+                android:id="@+id/back" />
+
+
+
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_centerInParent="true"
+                  android:textSize="22dp"
+                  android:textColor="#FFFFFF"
+                  android:text="我的钱包"/>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:text="账单明细"
+                android:id="@+id/to_account" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="#333333"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="22dp"
+                android:text="总资产"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/text_orange_name"
+                android:text="$5000.00"
+                android:id="@+id/all_money" />
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="15dp"
+            android:background="@drawable/divider"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#000000"
+                android:text="冻结金额(保证金)"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="￥750.00"
+                android:textSize="20dp"
+                android:textColor="@color/text_orange_name"
+                android:id="@+id/djbond" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+
+            android:background="@drawable/divider"
+            android:padding="15dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#000000"
+                android:text="可用余额"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textSize="20dp"
+                android:textColor="@color/text_orange_name"
+                android:text="￥750.00"
+                android:id="@+id/yuer" />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"
+            android:textColor="#000000"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="提示"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:textSize="18dp"
+            android:text="冻结金额是指您报名拍卖商品所缴纳的保证金。商品拍卖结束后，若您未得拍将返还至您的钱包里。"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_height="50dp">
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:textColor="#FFFFFF"
+            android:text="充值"
+            android:background="@color/text_orange_name"
+            android:layout_weight="1"
+            android:id="@+id/cz" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="#333333"
+            android:textSize="20dp"
+            android:textColor="#FFFFFF"
+            android:text="提现"
+            android:layout_weight="1"
+            android:id="@+id/tx" />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

@@ -1,0 +1,36 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+
+        >
+    <ListView
+        android:id="@+id/address_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@color/common_topbar_bg"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp"
+            android:text="+添加提现信息"
+            android:id="@+id/add_addaccount" />
+    </RelativeLayout>
+</LinearLayout>
+
+</RelativeLayout>

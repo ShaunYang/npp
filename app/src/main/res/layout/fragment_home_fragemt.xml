@@ -1,0 +1,247 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gv"
+>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/common_bg_color"
+        >
+
+        <com.yintai.common.view.CommonTopBar
+            android:id="@+id/ctb_chat_history_topbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/common_topbar_bg"
+            app:title_enable="true"
+            app:title_text="@string/home_title"
+            app:title_text_color="@color/white"
+            app:title_text_size="@dimen/huge_text_size" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal"
+            android:background="#e0000000"
+
+            android:paddingLeft="20dp"
+
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/main_borastcast"/>
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorwhite"
+                android:text=""
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollHorizontally="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:id="@+id/trunover" />
+
+        </LinearLayout>
+        <!-- 顶部的轮播图 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+
+
+            <com.zhuoyi.fauction.ui.home.view.SlideShowView
+
+                android:id="@+id/ssv_top_ad"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+
+                />
+
+            <LinearLayout
+                android:id="@+id/top_turnover_ll"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+
+                android:layout_height="200dp">
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="7"></View>
+            </LinearLayout>
+
+        </RelativeLayout>
+      <android.support.v7.widget.RecyclerView
+            android:id="@+id/id_recyclerview_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+          android:layout_weight="1.7"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+
+            android:scrollbars="none">
+
+        </android.support.v7.widget.RecyclerView>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_weight="3.3"
+            android:layout_height="0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:background="@color/bg_gray"
+
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:background="@color/bg_gray"
+                        android:paddingRight="1dp"
+                        android:layout_height="match_parent">
+                        <ImageButton
+                            
+
+                            android:id="@+id/home_iv_zxcj"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="3.4"
+
+
+                            android:background="@drawable/home_zxcj"/>
+                        <ImageButton
+                            android:id="@+id/home_iv_hrjx"
+                            android:layout_marginTop="2dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="3.6"
+                            android:background="@drawable/home_hrjx"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="1dp"
+                        android:background="@color/bg_gray"
+
+                        android:orientation="vertical"
+                        android:layout_height="match_parent">
+                        <ImageButton
+                            android:id="@+id/home_iv_pmyz"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="3.7"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/home_pmyz"/>
+                        <ImageButton
+                            android:id="@+id/home_iv_jrzq"
+                            android:layout_marginTop="2dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="3.3"
+                            android:background="@drawable/home_jrzq"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/main_recommond"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    android:layout_marginBottom="10dp"
+                    android:paddingTop="3dp"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="3dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/home_hot_icon"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="热门推荐"/>
+                    </LinearLayout>
+                    <ImageView
+                        android:id="@+id/home_ad_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/home_hot"
+                         />
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </ScrollView>
+        <!--<ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/home_hot_icon"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="热门推荐"/>
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/home_hot"/>
+            </LinearLayout>
+        </ScrollView>-->
+
+    </LinearLayout>
+
+   <!-- <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="24dp"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/main_back"/>
+
+    </RelativeLayout>-->
+
+
+</RelativeLayout>

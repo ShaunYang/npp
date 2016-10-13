@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/common_topbar_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/back"
+                android:background="@drawable/back"/>
+
+
+
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_centerInParent="true"
+                  android:textSize="22dp"
+                  android:textColor="#FFFFFF"
+                  android:text="相似拍品"/>
+
+
+
+
+        </RelativeLayout>
+        <!--<com.yintai.common.view.CommonTopBar
+            android:id="@+id/main_category"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/common_topbar_bg"
+            app:title_enable="true"
+            app:title_text="@string/myauction_title"
+            app:title_text_color="@color/white"
+            app:title_text_size="@dimen/huge_text_size" />-->
+        <com.zhuoyi.fauction.xlistview.XListView
+            android:id="@+id/xlistview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.zhuoyi.fauction.xlistview.XListView>
+
+    </LinearLayout>
+
+
+
+    <!-- <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+         <ImageButton
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginBottom="32dp"
+             android:layout_marginTop="15dp"
+             android:layout_marginLeft="24dp"
+             android:layout_alignParentLeft="true"
+             android:background="@drawable/main_back"/>
+
+     </RelativeLayout>-->
+
+
+</RelativeLayout>

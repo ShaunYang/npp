@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/gv"
+
+
+    android:gravity="center"
+
+    android:background="#F4F4F4" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:id="@+id/pick_bg"
+        android:background="@drawable/mypicket_nor"
+        android:orientation="horizontal">
+
+       <LinearLayout
+           android:layout_width="0dp"
+           android:layout_height="match_parent"
+           android:layout_weight="0.4"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingRight="10dp"
+            android:orientation="horizontal"
+            android:layout_weight="1.7">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥100.00"
+                android:textSize="13dp"
+
+                android:id="@+id/price"
+                android:textColor="#FFFFFF"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:layout_weight="4.4">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="满00.00可用"
+
+                android:layout_marginTop="17dp"
+                android:id="@+id/valid_price" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="限用于支付货款时使用"
+                android:layout_marginTop="5dp"
+
+                android:id="@+id/type" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="有效期至"
+                android:layout_marginTop="5dp"
+
+                android:id="@+id/valid_time" />
+        </LinearLayout>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

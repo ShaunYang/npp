@@ -1,0 +1,542 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/main_do"
+    android:layout_height="match_parent"
+    >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@color/common_topbar_bg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:id="@+id/back"
+                    android:background="@drawable/back"/>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textSize="22dp"
+                    android:textColor="#FFFFFF"
+                    android:text="提交订单"
+                    />
+
+
+
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@drawable/address_top"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/to_add_address_parent"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content">
+                <Button
+
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/common_topbar_bg"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15dp"
+                    android:text="+添加收获地址"
+                    android:id="@+id/to_add_address" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/have_address"
+                android:background="@drawable/divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="18dp"
+                                android:text="xxx"
+                                android:id="@+id/receipt_una" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="18dp"
+                                android:text="18987556546"
+                                android:id="@+id/receipt_phone" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="18dp"
+                                android:text="xxx"
+                                android:id="@+id/receipt_address" />
+
+
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/mine_arror"/>
+
+            </RelativeLayout>
+
+
+
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content"
+
+
+
+
+                android:gravity="center"
+
+                android:background="@drawable/boder" >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="10dp"
+                        >
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:id="@+id/pic" />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="2"
+                            android:layout_marginLeft="5dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12dp"
+                                    android:text="精选优良玉米10000斤"
+                                    android:id="@+id/title" />
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12dp"
+                                    android:text="成交价:"
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12dp"
+                                    android:textColor="@color/fauction_btn_color"
+                                    android:text="￥1.5/斤"
+                                    android:id="@+id/cj_price" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12dp"
+                                    android:text="成交数量:"
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12dp"
+                                    android:textColor="@color/fauction_btn_color"
+                                    android:text="1000斤"
+                                    android:id="@+id/cj_num" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12dp"
+                                    android:text="成交总价:"
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="12dp"
+                                    android:textColor="@color/fauction_btn_color"
+                                    android:text="2016.5.15  12:00:00"
+                                    android:id="@+id/cj_all_price" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="佣金"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="￥750.00"
+                    android:id="@+id/yongjing" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="保证金"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="￥750.00"
+                    android:id="@+id/baozhengjing" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/select_pack"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical"
+                android:layout_height="30dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:text="选择包装类型"
+                    />
+                <!--<RadioGroup
+                    android:id="@+id/pack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentRight="true"
+                    >
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="装箱"
+                        android:checked="false"
+                        android:id="@+id/pack_zx" />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="袋装"
+                        android:checked="false"
+                        android:id="@+id/pack_dz" />
+                </RadioGroup>-->
+
+                <ImageView
+                    android:id="@+id/pack_arror_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/mine_arror"/>
+
+                <TextView
+                    android:layout_toLeftOf="@id/pack_arror_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/pack_type"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/select_picket"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical"
+                android:layout_height="30dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:text="抵用劵抵扣"
+                    />
+                <!--<RadioGroup
+                    android:id="@+id/pack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentRight="true"
+                    >
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="装箱"
+                        android:checked="false"
+                        android:id="@+id/pack_zx" />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="袋装"
+                        android:checked="false"
+                        android:id="@+id/pack_dz" />
+                </RadioGroup>-->
+
+                <ImageView
+                    android:id="@+id/picket_arror_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/mine_arror"/>
+
+                <TextView
+                    android:layout_toLeftOf="@id/picket_arror_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:text="0张可用"
+                    android:id="@+id/packet_num"/>
+            </RelativeLayout>
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:text="配送方式"-->
+                    <!--/>-->
+                <!--<RadioGroup-->
+                    <!--android:id="@+id/deliver"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!-->-->
+                    <!--<RadioButton-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+
+                        <!--android:text="物流"-->
+                        <!--android:checked="false"-->
+                        <!--android:id="@+id/delivery_wl" />-->
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textColor="@color/text_orange_name"-->
+                        <!--android:text="100"-->
+                        <!--android:id="@+id/express" />-->
+                    <!--<RadioButton-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="自取"-->
+                        <!--android:checked="false"-->
+                        <!--android:id="@+id/deliver_zq" />-->
+                <!--</RadioGroup>-->
+            <!--</RelativeLayout>-->
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="运费险"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--/>-->
+                <!--<RadioGroup-->
+                    <!--android:id="@+id/insurance_a"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!-->-->
+                    <!--<RadioButton-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+
+                        <!--android:text="购买运费险"-->
+                        <!--android:checked="false"-->
+                        <!--android:id="@+id/insurance_r" />-->
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textColor="@color/text_orange_name"-->
+                        <!--android:text="100"-->
+                        <!--android:id="@+id/insurance" />-->
+                    <!--<RadioButton-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+
+                        <!--android:text="无"-->
+                        <!--android:checked="false"-->
+                        <!--android:id="@+id/insurance_null" />-->
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textColor="@color/text_orange_name"-->
+
+                         <!--/>-->
+                <!--</RadioGroup>-->
+            <!--</RelativeLayout>-->
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="合计："
+                    android:textColor="@color/text_orange_name"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="￥750.00"
+                    android:textColor="@color/text_orange_name"
+                    android:id="@+id/total" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+    <Button
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:background="@color/common_topbar_bg"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textSize="15dp"
+        android:text="提交订单并付款"
+        android:id="@+id/submit_order" />
+
+
+
+
+
+</RelativeLayout>

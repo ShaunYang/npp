@@ -1,0 +1,148 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+
+
+    <LinearLayout
+        android:id="@+id/top_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical"
+
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="商品简介:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            android:text="       xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            android:id="@+id/shangpingjianjie" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+            android:text="商品信息："/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="商家:"/>
+            <TextView
+                android:id="@+id/shangjia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="存货地:"/>
+            <TextView
+                android:id="@+id/cunhuodi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" /></LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="重量:"/>
+                <TextView
+                    android:id="@+id/zhongliang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="品种等级:"/>
+                <TextView
+                    android:id="@+id/pingzhongdengji"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" /></LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:textSize="18dp"
+            android:text="图片实拍"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/top_ll"
+        android:id="@+id/all_recycle"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:fadingEdge="vertical"
+        android:layout_marginBottom="50dp"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+
+    <!-- <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+         <ImageButton
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginBottom="32dp"
+             android:layout_marginTop="15dp"
+             android:layout_marginLeft="24dp"
+             android:layout_alignParentLeft="true"
+             android:background="@drawable/main_back"/>
+
+     </RelativeLayout>-->
+
+
+</RelativeLayout>

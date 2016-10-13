@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="common_topbar_bg">#4EB96F</color>
+    <color name="common_bg_color">#F0F0F0</color>
+    <color name="send_msg_btn_color">#FB5000</color>
+    <color name="chat_btn_color">#38A9EB</color>
+    <color name="call_btn_color">#24CC00</color>
+    <color name="ranking_yellow">#F9C03E</color>
+    <color name="ranking_gray">#D1D1D1</color>
+    <color name="ranking_blue">#0078D2</color>
+    <color name="colocrActivityBackground">#F0F0F0</color>
+    <color name="colorgray_BF">#BFBFBF</color>
+    <color name="colororange">#F5A220</color>
+    <color name="colorwhite">#FFFFFF</color>
+    <color name="info_name">#0A0A0A</color>
+    <color name="info_gray_text">#B8B7C0</color>
+    <color name="province_line_border">#C7C7C7</color>
+    <color name="buyinfo_money_text">#FFBD60</color>
+    <color name="text_red_birthday">#FF504B</color>
+    <color name="text_black_name">#101114</color>
+    <color name="text_orange_name">#F5A220</color>
+    <color name="bg_gray">#F3F3F3</color>
+    <color name="line">#ffd3dde6</color>
+    <color name="griditems_bg">#ffe8ecef</color>
+    <color name="commo_text_color">#ff333333</color>
+    <color name="txt_color_green">#4EBA6F</color>
+    <color name="background_tab_pressed">#8833B5E5</color>
+    <color name="fauction_btn_color">#FF9414</color>
+    <color name="gray_s">#999999</color>
+    <color name="color_ff">#F0F0F0</color>
+    <color name="color_00">#8A000000</color>
+</resources>

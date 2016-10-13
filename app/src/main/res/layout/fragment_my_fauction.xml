@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/common_bg_color"
+        >
+
+        <com.yintai.common.view.CommonTopBar
+            android:id="@+id/main_category"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/common_topbar_bg"
+            app:title_enable="true"
+            app:title_text="@string/myauction_title"
+            app:title_text_color="@color/white"
+            app:title_text_size="@dimen/huge_text_size" />
+
+        <com.zhuoyi.fauction.view.PagerSlidingTabStrip
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/tabs"
+            app:pstsIndicatorColor="@color/txt_color_green"
+            app:pstsIndicatorHeight="2dp"
+            app:pstsUnderlineHeight="2dp"
+            app:zmsSelectedTabTextColor="@color/txt_color_green"
+            app:zmsTabTextSize="15dp"
+            app:zmsSelectedTabTextSize="15dp"
+            app:pstsDividerColor="@android:color/transparent"
+            app:pstsShouldExpand="true"
+            android:fillViewport="false"></com.zhuoyi.fauction.view.PagerSlidingTabStrip>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+
+
+    </LinearLayout>
+
+    <!-- <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+         <ImageButton
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginBottom="32dp"
+             android:layout_marginTop="15dp"
+             android:layout_marginLeft="24dp"
+             android:layout_alignParentLeft="true"
+             android:background="@drawable/main_back"/>
+
+     </RelativeLayout>-->
+
+
+</RelativeLayout>
