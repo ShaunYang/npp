@@ -84,7 +84,7 @@ public class RemindItemDoAdapter extends BaseAdapter {
         }
         viewHolder.title.setText(fauctionDos.get(position).getTitle());
         viewHolder.price.setText("￥" + fauctionDos.get(position).getCurrent_price() + "/" + fauctionDos.get(position).getUnit());
-        viewHolder.remindNum.setText(fauctionDos.get(position).getStock() + fauctionDos.get(position).getUnit());
+        viewHolder.remindNum.setText(fauctionDos.get(position).getTotal()+fauctionDos.get(position).getUnit());
         //viewHolder.endTime.setText( fauctionDos.get(position).getDeal_time());
         viewHolder.niPrice.setText("￥"+fauctionDos.get(position).getPrice()+"/"+fauctionDos.get(position).getUnit());
         viewHolder.niNum.setText(fauctionDos.get(position).getBuy_num()+fauctionDos.get(position).getUnit());

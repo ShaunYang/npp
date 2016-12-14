@@ -640,7 +640,7 @@ public class BondPayActivity extends BaseActivity {
 						}
 						Intent intent=new Intent(BondPayActivity.this,ProductFauctionDetailDoingActivity.class);
 						intent.putExtra("productId",Common.proId);
-
+						startActivity(intent);
 						Common.isBondEqulsZero=false;
 						finish();
 					}

@@ -84,7 +84,17 @@ public class AddressAddActivity extends BaseActivity {
 		String timestamp= DateUtil.getStringDate();
 
 		String sign = Util.createSign(AddressAddActivity.this, timestamp, "Member", "increaseAddress");
-
+		String areaId="";
+		if(Common.area==null){
+			if(Common.city==null){
+				areaId=Common.province.getId();
+			}else{
+				areaId=Common.city.getId();
+			}
+		}else{
+			areaId=Common.area.getId();
+		}
+		Logger.i("areaId","areaId="+ areaId);
 
 		// Logger.i(TAG,"user_id="+ ConfigUserManager.getUserId(getApplicationContext()));
 		OkHttpUtils.post()
@@ -96,7 +106,7 @@ public class AddressAddActivity extends BaseActivity {
 				.addParams("uname",name.getText().toString())
 				.addParams("mobile",mobile.getText().toString())
 				.addParams("zip","22222")
-				.addParams("area", Common.area.getId())
+				.addParams("area", areaId)
 				.addParams("address",addressDetail.getText().toString())
 				.build()
 				.execute(new StringCallback() {

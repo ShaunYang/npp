@@ -1,7 +1,7 @@
 package com.zhuoyi.fauction.ui.home.activity;
-
 import android.app.Activity;
 import android.app.AlertDialog;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -66,11 +66,13 @@ import com.zhuoyi.fauction.utils.Util;
 import com.zhuoyi.fauction.view.CustomViewPager;
 import com.zhuoyi.fauction.view.PagerSlidingTabStrip;
 import com.zhuoyi.fauction.view.SelectPricePopWindow;
+import com.zhuoyi.fauction.view.SimpleViewPagerIndicator;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Field;
 import java.net.URLDecoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -96,7 +98,7 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
     @Bind(R.id.jiafu) TextView jiafu;
     @Bind(R.id.isbaoliu) TextView isbaoliu;
     @Bind(R.id.yanshizhouqi) TextView yanshizhouqi;
-    @Bind(R.id.jiangjiafudu) TextView jiangjiafudu;
+    //@Bind(R.id.jiangjiafudu) TextView jiangjiafudu;
     @Bind(R.id.kaipaishijian)
     TextView kaipaishijian;
     //@Bind(R.id.jieshushijian) TextView jieshushijian;
@@ -107,9 +109,10 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
     @Bind(R.id.more_paimaijilu) TextView morePaimaijilu;
     @Bind(R.id.paimairecycleview)
     ListView paimairecycleview;
-    @Bind(R.id.tabs) PagerSlidingTabStrip tabs;
-    @Bind(R.id.viewPagers)
-    ViewPager viewPagers;
+    @Bind(R.id.id_stickynavlayout_indicator)
+    PagerSlidingTabStrip tabs;
+    @Bind(R.id.id_stickynavlayout_viewpager)
+    CustomViewPager viewPagers;
     @Bind(R.id.tixing)
     LinearLayout tixing;
     @Bind(R.id.price_state) ImageView priceState;
@@ -119,13 +122,20 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
 
     @Bind(R.id.websocket)WebView webView;
 
-    @Bind(R.id.shoot_time) TextView shootTime;
+    @Bind(R.id.shoot_time_min) TextView shootTimeMin;
+    @Bind(R.id.shoot_time_sec) TextView shootTimeSec;
+    @Bind(R.id.shoot_time_hour) TextView shootTimeHour;
 
     @Bind(R.id.delay_time) TextView delay_time;
 
+    @Bind(R.id.jieshushijian) TextView jieshushijian;
+
     @Bind(R.id.record_title) LinearLayout record_title;
 
-    String[] title = { "拍卖详情", "拍卖须知", "拍卖流程" };
+    @Bind(R.id.current_remind_num) TextView current_remind_num;
+
+    //String[] title = { "拍卖详情", "拍卖须知", "拍卖流程" };
+    private String[] mTitles = new String[] { "拍卖详情", "拍卖须知", "拍卖流程" };
     //当前价格
     String currentPriceStr;
 
@@ -179,7 +189,7 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
     //
     public long mDay = 0;
     public long mHour = 0;
-    public long mMin = 0;
+    public long mMin =0;
     public long mSecond = 00;// 天 ,小时,分钟,秒
     private boolean isRun = true;
 
@@ -197,6 +207,12 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
     public String bond;
     //单位
     String unit;
+
+    //倒计时时间
+    String cownStr;
+
+    //判断是否出价小于当前价
+    
     //
     // 使用一个handler来处理加载事件
      Handler handler = new Handler() {
@@ -209,14 +225,44 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
                     break;
                 case 1:
                     shootStatusPost(proId);
-                    getTimeNum(pushPo.getEnd_time());
-                    if (mDay==-1){
+                   // jieshushijian.setText(pushPo.getEnd_time());
+                    jieshushijian.setText(pushPo.getEnd_time());
+                    if(pushPo.getPd().getNum()!=null){
+                        current_remind_num.setText(pushPo.getPd().getNum()+unit);
+
+                    }
+                    isRun=false;
+                    boolean isEnd=getTimeNum(pushPo.getCount_down());
+                    if(isEnd){
+                        //isRun=true;
+                        shootTimeMin.setText(mMin+"");
+                        shootTimeSec.setText(mSecond+"");
+                        shootTimeHour.setText(mHour+"");
+                        try {
+                            startRun();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        //shootTime.setText("剩余" + mDay + "天" + mHour + "小时" + mMin + "分钟" + mSecond + "秒");
+                    }else{
+                        shootTimeMin.setText(cownStr);
+                        shootTimeSec.setText("00");
+                        shootTimeHour.setText("00");
+                    }
+                    if(mDay==-1){
+                        shootTimeMin.setText(cownStr);
+                        shootTimeSec.setText("00");
+                        shootTimeHour.setText("00");
+                    }
+                    delay_time.setText("(第" + pushPo.getDelay_num() + "轮)");
+
+                    /*if (mDay==-1){
                         shootTime.setText(pushPo.getEnd_time());
                         delay_time.setText("结束");
                     }else{
                         shootTime.setText("剩余" + mDay + "天" + mHour + "小时" + mMin + "分钟" + mSecond + "秒");
-                        delay_time.setText("(延迟" + pushPo.getDelay_num() + "次)");
-                    }
+                        delay_time.setText("(第" + pushPo.getDelay_num() + "轮)");
+                    }*/
 //                    shootTime.setText("剩余" + mDay + "天" + mHour + "小时" + mMin + "分钟" + mSecond + "秒");
 //                    delay_time.setText("(延迟" + pushPo.getDelay_num() + "次)");
                     curPrice.setText("￥"+pushPo.getPd().getCurrent_price()+ "/"+unit);
@@ -228,9 +274,14 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
                         priceState.setBackgroundResource(R.drawable.price_down);
                     }
                     shootType=pushPo.getPd().getShoot_type();
-                    remindNum.setText(pushPo.getPd().getStock() + "/"+unit);
+                    //.setText(pushPo.getPd().getStock() + "/"+unit);
+                    remindNum.setText(pushPo.getTotal()+unit);
                     remind_num=Integer.parseInt(pushPo.getPd().getStock());
-                    pd_num=Integer.parseInt(pushPo.getPd().getNum());
+                   // String num = pushPo.getPd().getNum();
+                    if(pushPo.getPd().getNum()!=null){
+                        pd_num=Integer.parseInt(pushPo.getPd().getNum());
+                    }
+
                     pd_stock=Integer.parseInt(pushPo.getPd().getStock());
                     kepai_num=pd_num;
                     if(pushPo.getData()!=null){
@@ -309,13 +360,19 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
                         //提示登录
                         ToastUtil.showLongToast(ProductFauctionDetailDoingActivity.this,"您还未登录请先登录");
                         Intent intent=new Intent();
-                        intent.putExtra("tab",2);
+                        intent.putExtra("tab",3);
                         Common.whichActivity=1;
                         intent.setClass(ProductFauctionDetailDoingActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                     }else{
-                        if(shootType==1){
+                        //都满足做出价操作
+                        Double chu_price=Double.parseDouble(selectPricePopWindow.edit_price.getText().toString().trim());
+                        DecimalFormat decimalFormat3=new DecimalFormat("0.00");//构造方法的字符格式http://fir.im/npp1这里如果小数不足2位,会以0补足.
+                        String p3=decimalFormat3.format(chu_price);
+                        productOfferPost(proId,p3+"",sel_num+"");
+
+                  /*      if(shootType==1){
 //                            if(sel_price<cur_price){
 //                                //ToastUtil.showLongToast(ProductFauctionDetailDoingActivity.this,"你的出价不能小于当前价");
 //                                //break;
@@ -348,7 +405,7 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
                             }
                             //都满足做出价操作
                             productOfferPost(proId,cur_price+"",sel_num+"");
-                        }
+                        }*/
 
                     }
 
@@ -358,11 +415,33 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
         }
     };
 
+    public void setConfigCallback(WindowManager windowManager) {
+        try {
+            Field field = WebView.class.getDeclaredField("mWebViewCore");
+            field = field.getType().getDeclaredField("mBrowserFrame");
+            field = field.getType().getDeclaredField("sConfigCallback");
+            field.setAccessible(true);
+            Object configCallback = field.get(null);
+
+            if (null == configCallback) {
+                return;
+            }
+
+            field = field.getType().getDeclaredField("mWindowManager");
+            field.setAccessible(true);
+            field.set(configCallback, windowManager);
+        } catch(Exception e) {
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+       // setConfigCallback((WindowManager)getApplicationContext().getSystemService(Context.WINDOW_SERVICE));
 
     }
+
+
 
     @OnClick(R.id.tixing)
     public void tixingPost(){
@@ -372,7 +451,7 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
             //提示登录
             ToastUtil.showLongToast(ProductFauctionDetailDoingActivity.this,"您还未登录请先登录");
             Intent intent=new Intent();
-            intent.putExtra("tab",2);
+            intent.putExtra("tab",3);
             Common.whichActivity=1;
             intent.setClass(ProductFauctionDetailDoingActivity.this, MainActivity.class);
             startActivity(intent);
@@ -460,9 +539,8 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
 
     }
 
-
-    @OnClick(R.id.back) void onBackClick() {
-        //onBackPressed();
+    @Override
+    public void onBackPressed() {
         if(Common.whichActivity==1){
             Intent intent=new Intent();
             intent.putExtra("tab",2);
@@ -471,7 +549,23 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
             startActivity(intent);
             finish();
         }else{
-            onBackPressed();
+            super.onBackPressed();
+        }
+
+
+    }
+
+    @OnClick(R.id.back) void onBackClick() {
+        //onBackPressed();
+        if(Common.whichActivity==1){
+                Intent intent=new Intent();
+                intent.putExtra("tab",2);
+                Common.whichActivity=1;
+                intent.setClass(ProductFauctionDetailDoingActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }else{
+                onBackPressed();
         }
        /* Intent intent=new Intent();
         intent.putExtra("tab",0);
@@ -690,7 +784,8 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
                 public void run() {
                     // 重要：url的生成,传递数据给网页
                     if (urlBean !=null){
-                        String json = "{\"url\":\"" + urlBean.getUrl() + "\",\"uid\":\"" + urlBean.getUid() + "\"}";
+                        //String json = "{\"url\":\"" + urlBean.getUrl() + "\",\"uid\":\"" + "t"+urlBean.getUid() + "\"}";
+                       String json = "{\"url\":\"" + urlBean.getUrl() + "\",\"uid\":\"" + urlBean.getUid() + "\"}";
                         System.out.println("json=" + json);
                         String url = "javascript:insertData('" + json + "')";
                         webView.loadUrl(url);
@@ -799,6 +894,7 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
 
 
 
+
         }else if(login_status==1){
             //Log.i("kepainum=",kepai_num);
             selectPricePopWindow=new SelectPricePopWindow(ProductFauctionDetailDoingActivity.this,itemsOnClick,cur_price,kepai_num,state,unit);
@@ -870,16 +966,9 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
                             ProductDetail2 productDetail2 = gson.fromJson(response, ProductDetail2.class);
                             if (productDetail2 != null) {
                                 Common.productDetail2 = productDetail2;
+                                //Common.viewPagers=(CustomViewPager)findViewById(R.id.id_stickynavlayout_viewpager);
                                 viewPagers.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-                                /*// 1、获取屏幕密度
-                                float desity = getResources().getDisplayMetrics().density;
-                                // 2、获取ViewPager在不同屏幕密度上的手机的高度
-                                int viewPagerHeight = (int) (VIEWPAGER_DEFAULT_HEIGHT * desity);
-                                // 3、通过setLayoutParams方式，给ViewPager动态设置高度
-                                viewPagers.setLayoutParams(new LinearLayout.LayoutParams(
-                                        LinearLayout.LayoutParams.MATCH_PARENT, viewPagerHeight));*/
-
-                                tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+                                tabs = (PagerSlidingTabStrip) findViewById(R.id.id_stickynavlayout_indicator);
                                 tabs.setViewPager(viewPagers);
                                 tabs.setDividerColor(0xFFFFFF);
                                 viewPagers.setCurrentItem(0);
@@ -937,7 +1026,7 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
                             }
                             shoot_time=data.getShoot_time();
                             end_time=data.getEnd_time();
-                            remindNum.setText(data.getStock()+data.getUnit());
+                            //remindNum.setText(data.getStock()+data.getUnit());
                             remind_num=Integer.parseInt(data.getStock());
                             qipai.setText("￥"+data.getShoot_price()+"/"+data.getUnit());
                             qipai_price=Float.parseFloat(data.getShoot_price());
@@ -964,7 +1053,8 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
                                 isTx = false;
                             }
                             yanshizhouqi.setText(data.getDelayed()+"分钟/次");
-                            jiangjiafudu.setText("￥"+data.getCut_price()+"/"+data.getPrice_cycle()+"分钟");
+                            cownStr=data.getDelayed();
+                            //jiangjiafudu.setText("￥"+data.getCut_price()+"/"+data.getPrice_cycle()+"分钟");
 
                             Logger.i(TAG + "price_fd=", price_fd + "");
                             kaipaishijian.setText(data.getShoot_time());
@@ -991,7 +1081,72 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
                             }
                             topAd.setView(mImgBannerUrl.toArray(new String[mImgBannerUrl.size()]));
 
-                            detailSecondPagePost(proId);
+                            //detailSecondPagePost(proId);
+                            viewPagers=(CustomViewPager)findViewById(R.id.id_stickynavlayout_viewpager);
+                            viewPagers.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+                            tabs = (PagerSlidingTabStrip) findViewById(R.id.id_stickynavlayout_indicator);
+
+                            tabs.setViewPager(viewPagers);
+                            tabs.setDividerColor(0xFFFFFF);
+                            viewPagers.setCurrentItem(0);
+                            tabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                                @Override
+                                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                                }
+
+                                @Override
+                                public void onPageSelected(int position) {
+                                    viewPagers.resetHeight(position);
+                                }
+
+                                @Override
+                                public void onPageScrollStateChanged(int state) {
+
+                                }
+                            });
+                            viewPagers.resetHeight(0);
+
+                         /*   viewPagers.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                                @Override
+                                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                                }
+
+                                @Override
+                                public void onPageSelected(int position) {
+                                    viewPagers.resetHeight(position);
+
+
+                                    *//*if (position == 0) {
+
+                                        activityScdetailsBottomLinear.setBackgroundResource(R.drawable.fishbone_diagram_list_btn_1);
+                                        activityScdetailsBottomTaskTv.setTextColor(Color.parseColor("#ffffff"));
+                                        activityScdetailsBottomInfoTv.setTextColor(Color.parseColor("#c1c1c1"));
+                                        activityScdetailsBottomTimeTv.setTextColor(Color.parseColor("#c1c1c1"));
+
+                                    } else if (position == 1) {
+
+                                        activityScdetailsBottomLinear.setBackgroundResource(R.drawable.fishbone_diagram_list_btn_2);
+                                        activityScdetailsBottomTaskTv.setTextColor(Color.parseColor("#c1c1c1"));
+                                        activityScdetailsBottomInfoTv.setTextColor(Color.parseColor("#ffffff"));
+                                        activityScdetailsBottomTimeTv.setTextColor(Color.parseColor("#c1c1c1"));
+                                    } else {
+
+                                        activityScdetailsBottomLinear.setBackgroundResource(R.drawable.fishbone_diagram_list_btn_3);
+                                        activityScdetailsBottomTaskTv.setTextColor(Color.parseColor("#c1c1c1"));
+                                        activityScdetailsBottomInfoTv.setTextColor(Color.parseColor("#c1c1c1"));
+                                        activityScdetailsBottomTimeTv.setTextColor(Color.parseColor("#ffffff"));
+                                    }*//*
+
+                                }
+                                @Override
+                                public void onPageScrollStateChanged(int state) {
+
+                                }
+                            });*/
+
+                            auctionDetailRecordPost(proId);
                         }
 
 
@@ -1013,7 +1168,6 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
                 .addParams("client_id", ConfigUserManager.getUnicodeIEME(ProductFauctionDetailDoingActivity.this))
                 .addParams("user_id",ConfigUserManager.getUserId(ProductFauctionDetailDoingActivity.this))
                 .addParams("id",String.valueOf(productId))
-                .addParams("type",String.valueOf(state))
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -1030,54 +1184,103 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
                             Gson gson=new Gson();
                             RecordDetail recordDetail = gson.fromJson(response, RecordDetail.class);
                             if(recordDetail!=null){
+                                remindNum.setText(recordDetail.getTotal()+unit);
+                                current_remind_num.setText(recordDetail.getPd().getNum()+unit);
                                 List<RecordDetail.DataBean> data = recordDetail.getData();
                                 if(data!=null){
                                     Logger.i(TAG + "--recordauction=", "" + data.size());
+
                                     if(data.size()==0){
                                         paimairecycleview.setVisibility(View.GONE);
                                         record_title.setVisibility(View.GONE);
                                         remind.setText(recordDetail.getEnlist_num() + "人报名 出价" + recordDetail.getOffer_num() + "次");
-                                        boolean isEnd=getTimeNum(recordDetail.getEnd_time());
+                                        jieshushijian.setText(recordDetail.getEnd_time());//结束时间
+                                        boolean isEnd=getTimeNum(recordDetail.getCount_down());
                                         Logger.i("recordDetail.getEnd_time()=",recordDetail.getEnd_time());
+                                        Logger.i("recordDetail.getCount_down()=",recordDetail.getCount_down());
                                         if(isEnd){
-                                            shootTime.setText("剩余" + mDay + "天" + mHour + "小时" + mMin + "分钟" + mSecond + "秒");
+                                            shootTimeMin.setText(mMin+"");
+                                            shootTimeSec.setText(mSecond+"");
+                                            shootTimeHour.setText(mHour+"");
+                                            try {
+                                                startRun();
+                                            } catch (InterruptedException e) {
+                                                e.printStackTrace();
+                                            }
+                                            //shootTime.setText("剩余" + mDay + "天" + mHour + "小时" + mMin + "分钟" + mSecond + "秒");
+                                        }else{
+                                           shootTimeMin.setText(cownStr);
+                                            shootTimeSec.setText("00");
+                                            shootTimeHour.setText("00");
                                         }
                                         pd_num=Integer.parseInt(recordDetail.getPd().getNum());
                                         pd_stock=Integer.parseInt(recordDetail.getPd().getStock());
                                         kepai_num=pd_num;
-                                        delay_time.setText("(延迟" + recordDetail.getDelay_num() + "次)");
-                                        startRun();
+                                        delay_time.setText("(第" + recordDetail.getDelay_num() + "轮)");
+
                                     }else{
                                         paimairecycleview.setVisibility(View.VISIBLE);
                                         record_title.setVisibility(View.VISIBLE);
                                         paimairecycleview.setAdapter(new DetailRecordAdapter(ProductFauctionDetailDoingActivity.this, data));
                                         remind.setText(recordDetail.getEnlist_num() + "人报名 出价" + recordDetail.getOffer_num() + "次");
-                                        boolean isEnd=getTimeNum(recordDetail.getEnd_time());
+                                        jieshushijian.setText(recordDetail.getEnd_time());//结束时间
+                                        boolean isEnd=getTimeNum(recordDetail.getCount_down());
                                         Logger.i("recordDetail.getEnd_time()=",recordDetail.getEnd_time());
+                                        Logger.i("recordDetail.getCount_down()=",recordDetail.getCount_down());
+
                                         if(isEnd){
-                                            shootTime.setText("剩余" + mDay + "天" + mHour + "小时" + mMin + "分钟" + mSecond + "秒");
+                                            shootTimeMin.setText(mMin+"");
+                                            shootTimeSec.setText(mSecond+"");
+                                            shootTimeHour.setText(mHour+"");
+
+                                            try {
+                                                startRun();
+                                            } catch (InterruptedException e) {
+                                                e.printStackTrace();
+                                            }
+                                            //shootTime.setText("剩余" + mDay + "天" + mHour + "小时" + mMin + "分钟" + mSecond + "秒");
+                                        }else{
+                                            shootTimeMin.setText(cownStr);
+                                            shootTimeSec.setText("00");
+                                            shootTimeHour.setText("00");
+
                                         }
                                         pd_num=Integer.parseInt(recordDetail.getPd().getNum());
                                         pd_stock=Integer.parseInt(recordDetail.getPd().getStock());
                                         kepai_num=pd_num;
-                                        delay_time.setText("(延迟"+recordDetail.getDelay_num()+"次)");
-                                        startRun();
+                                        delay_time.setText("(第" + recordDetail.getDelay_num() + "轮)");
+
                                     }
 
                                 }else{
                                     paimairecycleview.setVisibility(View.GONE);
                                     record_title.setVisibility(View.GONE);
                                     remind.setText(recordDetail.getEnlist_num() + "人报名 出价" + recordDetail.getOffer_num() + "次");
-                                    boolean isEnd=getTimeNum(recordDetail.getEnd_time());
-                                    Logger.i("recordDetail.getEnd_time()=", recordDetail.getEnd_time());
+                                    jieshushijian.setText(recordDetail.getEnd_time());//结束时间
+                                    boolean isEnd=getTimeNum(recordDetail.getCount_down());
+                                    Logger.i("recordDetail.getEnd_time()=",recordDetail.getEnd_time());
+                                    Logger.i("recordDetail.getCount_down()=",recordDetail.getCount_down());
+
                                     if(isEnd){
-                                        shootTime.setText("剩余" + mDay + "天" + mHour + "小时" + mMin + "分钟" + mSecond + "秒");
+                                        shootTimeMin.setText(mMin+"");
+                                        shootTimeSec.setText(mSecond+"");
+                                        shootTimeHour.setText(mHour+"");
+                                        try {
+                                            startRun();
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                        //shootTime.setText("剩余" + mDay + "天" + mHour + "小时" + mMin + "分钟" + mSecond + "秒");
+                                    }else{
+                                        shootTimeMin.setText(cownStr);
+                                        shootTimeSec.setText("00");
+                                        shootTimeHour.setText("00");
                                     }
                                     pd_num=Integer.parseInt(recordDetail.getPd().getNum());
                                     pd_stock=Integer.parseInt(recordDetail.getPd().getStock());
                                     kepai_num=pd_num;
-                                    delay_time.setText("(延迟"+recordDetail.getDelay_num()+"次)");
-                                    startRun();
+                                    delay_time.setText("(第" + recordDetail.getDelay_num() + "轮)");
+                                    //startRun();
                                 }
                                 DialogUtil.dismiss();
                                 //{"ret":200,"code":0,"data":[{"status":"\u5f97\u62cd","user_name":"123213","price":"10.00","num":"5200","unit":"\u65a4","add_time":"2016-06-01 16:09:52"},{"status":"\u5f97\u62cd","user_name":"","price":"10.00","num":"600","unit":"\u65a4","add_time":"2016-05-31 11:35:03"},{"status":"\u5f97\u62cd","user_name":"","price":"1.54","num":"1200","unit":"\u65a4","add_time":"2016-05-30 18:40:56"}],"enlist_num":"3","offer_num":"3","end_time":"33\u592921\u5c0f\u65f629\u52069\u79d2","delay_num":"0","pd":{"current_price":"10.00","shoot_type":0,"stock":"3000"}}
@@ -1096,7 +1299,7 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
 
         String sign= Util.createSign(ProductFauctionDetailDoingActivity.this, timestamp, "Product", "offer");
 
-        String key= MD5Util.getMD5String(num + price + shootType);
+        String key= MD5Util.getMD5String(num + price + productId);
 
         Logger.i(TAG+"price====",price);
 
@@ -1109,7 +1312,6 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
                 .addParams("client_id", ConfigUserManager.getUnicodeIEME(ProductFauctionDetailDoingActivity.this))
                 .addParams("user_id", ConfigUserManager.getUserId(ProductFauctionDetailDoingActivity.this))
                 .addParams("id",String.valueOf(productId))
-                .addParams("type",shootType+"")
                 .addParams("price", price)
                 .addParams("num", num)
                 .addParams("key", key)
@@ -1155,7 +1357,11 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
                         } else if (ret.getCode() == -10) {
                             ToastUtil.showLongToast(ProductFauctionDetailDoingActivity.this, "超时 请重新提交");
                         } else if (ret.getCode() == -11) {
-                            ToastUtil.showLongToast(ProductFauctionDetailDoingActivity.this, "拍卖价格不能低于保留价");
+                            ToastUtil.showLongToast(ProductFauctionDetailDoingActivity.this, "出价价格必须是加价幅度倍数");
+                        }else if (ret.getCode() == -12) {
+                            ToastUtil.showLongToast(ProductFauctionDetailDoingActivity.this, "购买数量必须是起拍数量的倍数");
+                        }else if (ret.getCode() == -13) {
+                            ToastUtil.showLongToast(ProductFauctionDetailDoingActivity.this, "购买数量必须大于可拍数量");
                         }
 
 
@@ -1210,9 +1416,21 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
                                     }else{
                                         chuJia.setText("您已成交\n点击去付款");
                                     }
+                                    mMin=Integer.parseInt(cownStr);
+                                    mSecond=0;
+                                    mHour=0;
+                                    shootTimeMin.setText(cownStr+"");
+                                    shootTimeSec.setText(0+"");
+                                    shootTimeHour.setText(0+"");
 
                                 }else{
                                     chuJia.setText("您已成交\n已付款");
+                                    mMin=Integer.parseInt(cownStr);
+                                    mSecond=0;
+                                    mHour=0;
+                                    shootTimeMin.setText(cownStr+"");
+                                    shootTimeSec.setText(0+"");
+                                    shootTimeHour.setText(0+"");
                                 }
 
                             }
@@ -1229,9 +1447,9 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
 
     class MyPagerAdapter extends FragmentPagerAdapter {
 
-        FauctionDetailFragment fauctionDetailFragment;
-        FauctionKnowFragment fauctionKnowFragment;
-        FauctionStepFragment fauctionStepFragment;
+        FauctionDetailFragment fauctionDetailFragment =new FauctionDetailFragment(viewPagers);
+        FauctionKnowFragment fauctionKnowFragment= new FauctionKnowFragment(viewPagers);
+        FauctionStepFragment fauctionStepFragment= new FauctionStepFragment(viewPagers);
 
 
 
@@ -1251,16 +1469,14 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    fauctionDetailFragment = new FauctionDetailFragment();
-                   // mainCategory.setTitle(title[0]);
+
                     return fauctionDetailFragment;
                 case 1:
-                    fauctionKnowFragment = new FauctionKnowFragment();
-                   // mainCategory.setTitle(title[1]);
+
+
                     return fauctionKnowFragment;
                 case 2:
-                    fauctionStepFragment = new FauctionStepFragment();
-                    //mainCategory.setTitle(title[2]);
+
                     return fauctionStepFragment;
 
 
@@ -1273,12 +1489,12 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
         @Override
         public int getCount() {
 
-            return title.length;
+            return mTitles.length;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return title[position];
+            return mTitles[position];
         }
 
     }
@@ -1297,9 +1513,19 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
 //                    delay_time.setText("结束");
 //
 //                }else{
-                    shootTime.setText("剩余"+mDay+"天"+mHour+"小时"+mMin+"分钟"+mSecond+"秒");
-                    if(pushPo!=null){
-                        delay_time.setText("(延迟" + pushPo.getDelay_num() + "次)");
+                    //shootTime.setText("剩余"+mDay+"天"+mHour+"小时"+mMin+"分钟"+mSecond+"秒");
+                    if((mMin==0)&&(mSecond==0)){
+                        isRun=false;
+                        shootTimeMin.setText(0+"");
+                        shootTimeSec.setText(0+"");
+                        shootTimeHour.setText(0+"");
+                    }
+                    shootTimeMin.setText(mMin+"");
+                    shootTimeSec.setText(mSecond+"");
+                     shootTimeHour.setText(mHour+"");
+
+                if(pushPo!=null){
+                        delay_time.setText("(第" + pushPo.getDelay_num() + "轮)");
                    //}
 
                 }
@@ -1310,7 +1536,7 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
 
     private boolean getTimeNum(String str) {
 
-        //临时字符串
+        //临时字符串2016-10-21 11:36
         String temp;
         String day;
         String hour;
@@ -1319,6 +1545,7 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
         String[] dayArray=str.split("天");
 
         day=dayArray[0];
+
 //        if(day.equals("-1")){
 //            shootTime.setText(str+" 结束");
 //            return false;
@@ -1326,11 +1553,18 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
 
         int length = dayArray.length;
         Logger.i("length=",length+"");
-        if(length==1){
-            shootTime.setText(str+" 结束");
+        if("0".equals(str)){
             return false;
         }
+        /*if(length==1){
+           // shootTime.setText(str+" 结束");
+            return false;
+        }*/
         //去掉天后
+        Logger.i("crowd_str=",str+"");
+        if(length<2){
+            return false;
+        }
         String[] hourArray=dayArray[1].split("小时");
         hour=hourArray[0];
 
@@ -1361,6 +1595,7 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
      * 倒计时计算
      */
     private void computeTime() {
+
         mSecond--;
         if (mSecond < 0) {
             mMin--;
@@ -1376,15 +1611,29 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
             }
         }
     }
-
+    Thread cthread;
+    Thread preThread;
     /**
      * 开启倒计时
      */
-    private void startRun() {
-        new Thread(new Runnable() {
+    private void startRun() throws InterruptedException {
+        /*if(cthread!=null){
+            cthread.stop();
+        }*/
+        cthread = new Thread(new Runnable() {
 
             @Override
             public void run() {
+
+                   try {
+                        Thread.sleep(1000);
+                        isRun = true;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+
+
                 // TODO Auto-generated method stub
                 while (isRun) {
                     try {
@@ -1397,7 +1646,11 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
                     }
                 }
             }
-        }).start();
+        });
+        //preThread=cthread;
+        cthread.start();
+
+
     }
 
 
@@ -1426,7 +1679,11 @@ public class ProductFauctionDetailDoingActivity extends BaseActivity {
 
     @Override
     protected void destory() {
-
+       /* BusProvider.getInstance().unregister(this);
+        ButterKnife.unbind(this);*/
+        //Common.viewPagers.removeAllViews();
+        Common.viewPagers=null;
+       // setConfigCallback(null);
     }
 
     @Override

@@ -25,7 +25,17 @@ public class RecordDetail {
     private String offer_num;
     private String end_time;
     private String delay_num;
+    private String count_down;
     private int shoot_state;
+    private String total;
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
 
     public int getShoot_state() {
         return shoot_state;
@@ -42,6 +52,15 @@ public class RecordDetail {
      */
 
     private PdBean pd;
+
+    public String getCount_down() {
+        return count_down;
+    }
+
+    public void setCount_down(String count_down) {
+        this.count_down = count_down;
+    }
+
     /**
      * status : 得拍
      * user_name :
@@ -50,6 +69,8 @@ public class RecordDetail {
      * unit : 斤
      * add_time : 2016-05-31 11:30:24
      */
+
+
 
     private List<DataBean> data;
 

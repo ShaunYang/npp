@@ -9,6 +9,7 @@ import android.content.Intent;
 import com.lidroid.xutils.exception.DbException;
 import com.qiniu.android.common.Zone;
 import com.qiniu.android.storage.Configuration;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.yintai.DatabaseManager;
 import com.yintai.UserManager;
 import com.yintai.common.util.Logger;
@@ -44,7 +45,9 @@ public class MobileManagerApplication extends Application {
         } catch (DbException e) {
             e.printStackTrace();
         }
-
+        //腾讯bugly初始化
+        CrashReport.initCrashReport(getApplicationContext(),"900057684",true);
+        //CrashReport.testJavaCrash();
       /*  UserManager.getInstance().init(DatabaseManager.getInstance().getDb(), new UserManager.OnLoginListener() {
             @Override
             public void loginSuccess() {

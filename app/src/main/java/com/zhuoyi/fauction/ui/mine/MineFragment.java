@@ -105,6 +105,7 @@ public class MineFragment extends Fragment {
 
     private void initComponent(){
         Common.home_tab=4;
+        Common.whichActivity=3;
         //Picasso.with(mContext).load(categories.get(position).getNormal_img()).into(iv);
         if(ConfigUserManager.isAlreadyLogin(getContext())){
             //取数据库用户信息

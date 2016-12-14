@@ -171,7 +171,11 @@
                     android:layout_centerVertical="true"
                     android:textSize="12dp"
                     android:id="@+id/remind_time" />
-
+                <View
+                    android:id="@+id/pay_right"
+                    android:layout_width="1dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="0dp"></View>
 
 
 
@@ -180,10 +184,11 @@
                 <Button
                     android:id="@+id/pay"
                     android:layout_width="70dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="1dp"
                     android:layout_height="20dp"
-                    android:layout_alignParentRight="true"
+
                     android:background="@drawable/remind_state_btn"
+                    android:layout_toLeftOf="@id/pay_right"
                     android:textColor="@color/black"
                     android:focusable = "false"
                     android:text="立即付款"/>
@@ -192,8 +197,7 @@
                     android:layout_toLeftOf="@id/pay"
                     android:layout_width="70dp"
                     android:layout_height="20dp"
-                    android:layout_toRightOf="@id/remind_time"
-                    android:layout_marginLeft="100dp"
+                    android:layout_marginRight="0.2dp"
                     android:background="@drawable/remind_state_btn"
                     android:textColor="@color/black"
                     android:text="取消提醒"

@@ -22,6 +22,7 @@ import com.zhuoyi.fauction.event.BusProvider;
 import com.zhuoyi.fauction.model.Category;
 import com.zhuoyi.fauction.model.FauctionDo;
 import com.zhuoyi.fauction.net.Constant;
+import com.zhuoyi.fauction.ui.MainActivity;
 import com.zhuoyi.fauction.ui.category.activity.CategoryDoingTabActivity;
 import com.zhuoyi.fauction.ui.category.adapter.CategoryDoingAdapter;
 import com.zhuoyi.fauction.ui.home.activity.ProductFauctionDetailDoingActivity;
@@ -109,7 +110,16 @@ public class LikeFauctionProActivity extends BaseActivity implements View.OnClic
 
     @OnClick(R.id.back) void onBackClick() {
         //TODO implement
-        onBackPressed();
+        if(Common.whichActivity==1){
+            Intent intent=new Intent();
+            intent.putExtra("tab",2);
+            Common.whichActivity=1;
+            intent.setClass(LikeFauctionProActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            onBackPressed();
+        }
     }
 
     @Override

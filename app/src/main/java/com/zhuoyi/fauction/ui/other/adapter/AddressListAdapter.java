@@ -94,27 +94,31 @@ public class AddressListAdapter extends BaseAdapter {
         int cityId = fauctionDos.get(position).getCity();
         String areaId = fauctionDos.get(position).getArea();
         StringBuilder sb = new StringBuilder();
-        for (Area area : list) {
-            String pid = area.getProvince().getId();
-            if (pid.equals(provinceId + "")) {
-                Area.ProvinceBean province = area.getProvince();
-                Logger.i("province.getName()=",province.getName()+"");
-                sb.append(province.getName());
-                List<Area.ProvinceBean.CityBean> citys = province.getCity();
-                for (Area.ProvinceBean.CityBean city : citys) {
-                    if (city.getId().equals(cityId+"")) {
-                        sb.append(city.getName());
-                        List<Area.ProvinceBean.CityBean.AreaBean> areas = city.getArea();
-                        for (Area.ProvinceBean.CityBean.AreaBean areaBean : areas) {
-                            if (areaBean.getId().equals(areaId+"")) {
-                                sb.append(areaBean.getName());
-                            }
 
+
+        for (Area area : list) {
+                String pid = area.getProvince().getId();
+                if (pid.equals(provinceId + "")) {
+                    Area.ProvinceBean province = area.getProvince();
+                    Logger.i("province.getName()=",province.getName()+"");
+                    sb.append(province.getName());
+                    List<Area.ProvinceBean.CityBean> citys = province.getCity();
+                    for (Area.ProvinceBean.CityBean city : citys) {
+                        if (city.getId().equals(cityId+"")) {
+                            sb.append(city.getName());
+                            List<Area.ProvinceBean.CityBean.AreaBean> areas = city.getArea();
+                            for (Area.ProvinceBean.CityBean.AreaBean areaBean : areas) {
+                                if (areaBean.getId().equals(areaId+"")) {
+                                    sb.append(areaBean.getName());
+                                }
+
+                            }
                         }
                     }
                 }
             }
-        }
+
+
         //address.setText(sb.toString() + orderDetail.getData().getReceipt().getAddress());
         viewHolder.address.setText(sb.toString()+fauctionDos.get(position).getAddress());
         viewHolder.addressSel.setVisibility(View.GONE);

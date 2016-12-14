@@ -74,7 +74,7 @@ public class MyHaveFauctionEndAdapter extends BaseAdapter {
         }
         viewHolder.title.setText(fauctionDos.get(position).getTitle());
         viewHolder.end_price.setText("￥" + fauctionDos.get(position).getCurrent_price() + "/"+fauctionDos.get(position).getUnit());
-        viewHolder.remindNum.setText(fauctionDos.get(position).getStock() + "/"+fauctionDos.get(position).getUnit());
+        viewHolder.remindNum.setText(fauctionDos.get(position).getStock() +fauctionDos.get(position).getUnit());
         viewHolder.end_time.setText(fauctionDos.get(position).getDeal_time());
         //判断是否得拍
         Logger.i("sidepai",fauctionDos.get(position).getStatus());

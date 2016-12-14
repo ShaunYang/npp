@@ -22,6 +22,13 @@ public class DateUtil {
 		//System.out.println("毫秒数转化后的时间为："+ sdf.format(date)); 
 		return  sdf.format(date);
 	}
+
+	public static String getDateFromDetail(Long sstime){
+		Date date = new Date(sstime);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		//System.out.println("毫秒数转化后的时间为："+ sdf.format(date));
+		return  sdf.format(date);
+	}
 	
 	
 	/**

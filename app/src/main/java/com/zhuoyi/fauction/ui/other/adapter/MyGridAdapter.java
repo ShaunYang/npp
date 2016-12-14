@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.zhuoyi.fauction.R;
+import com.zhuoyi.fauction.model.RecommondPo;
 import com.zhuoyi.fauction.model.ReminderPo;
 
 import java.util.List;
@@ -21,9 +22,9 @@ import butterknife.ButterKnife;
 public class MyGridAdapter extends BaseAdapter {
     private Context mContext;
     private int pos;
-    List<ReminderPo.DataBean> dataBeans;
+    List<RecommondPo> dataBeans;
 
-    public MyGridAdapter(Context mContext, List<ReminderPo.DataBean> dataBeanList) {
+    public MyGridAdapter(Context mContext, List<RecommondPo> dataBeanList) {
         super();
         dataBeans = dataBeanList;
         this.mContext = mContext;

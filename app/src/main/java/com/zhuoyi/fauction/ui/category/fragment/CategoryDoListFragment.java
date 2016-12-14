@@ -132,7 +132,7 @@ public class CategoryDoListFragment extends Fragment implements View.OnClickList
                 FauctionDo fdo=fauctionDos.get(arg2-1);
                 intent.putExtra("productId",fdo.getId());
                 getActivity().startActivity(intent);
-
+                getActivity().finish();
 
             }
         });
@@ -160,162 +160,172 @@ public class CategoryDoListFragment extends Fragment implements View.OnClickList
 
 
     private void loadDataListPost(final int pageSize,final boolean isFlash,int order){
+            if(category!=null){
+                if(category.getId().equals("-1")){
+                    if(pageSize<=mPageSize){
+                        String timestamp= DateUtil.getStringDate();
 
-            if(category.getId().equals("-1")){
-                if(pageSize<=mPageSize){
-                    String timestamp= DateUtil.getStringDate();
+                        String sign= Util.createSign(getActivity(),timestamp,"Product","deal");
 
-                    String sign= Util.createSign(getActivity(),timestamp,"Product","deal");
+                        OkHttpUtils.post()
+                                .url(Constant.PRODUCT_DEAL)
+                                .addParams("sign", sign).addParams("codes", ConfigUserManager.getToken(getContext()))
+                                .addParams("timestamp", timestamp)
+                                .addParams("client_id", ConfigUserManager.getUnicodeIEME(getActivity()))
+                                .addParams("user_id",ConfigUserManager.getUserId(getActivity()))
+                                .addParams("page",String.valueOf(pageSize))
+                                .addParams("order",order+"")
+                                .build()
+                                .execute(new StringCallback() {
+                                    @Override
+                                    public void onError(Call call, Exception e) {
 
-                    OkHttpUtils.post()
-                            .url(Constant.PRODUCT_DEAL)
-                            .addParams("sign", sign).addParams("codes", ConfigUserManager.getToken(getContext()))
-                            .addParams("timestamp", timestamp)
-                            .addParams("client_id", ConfigUserManager.getUnicodeIEME(getActivity()))
-                            .addParams("user_id",ConfigUserManager.getUserId(getActivity()))
-                            .addParams("page",String.valueOf(pageSize))
-                            .addParams("order",order+"")
-                            .build()
-                            .execute(new StringCallback() {
-                                @Override
-                                public void onError(Call call, Exception e) {
-
-                                }
-
-                                @Override
-                                public void onResponse(String response) {
-
-                                    Logger.i(TAG + "45646456456====", response);
-                                    if (isFirst)
-                                        ((CategoryDoingTabActivity) getActivity()).dismiss();
-
-                                    if (isFlash)
-                                        fauctionDos = new ArrayList<FauctionDo>();
-                                    //json解析
-                                    JSONObject jsonObject = JSONObject.parseObject(response);
-                                    int code = jsonObject.getIntValue("code");
-                                    if (code == 0) {
-                                        JSONObject data = jsonObject.getJSONObject("data");
-                                        mPageSize = jsonObject.getInteger("total_page");
-                                        for (int i = 0; i < REQUEST_COUNT; i++) {
-                                            int j = i + 1;
-                                            JSONObject temp = data.getJSONObject(j + "") ;
-                                            if (temp == null) {
-                                                break;
-                                            }
-
-                                            FauctionDo fauctionDo = new FauctionDo();
-                                            fauctionDo.setCurPrice(temp.getString("current_price"));
-                                            fauctionDo.setId(temp.getShort("id"));
-                                            fauctionDo.setTitle(temp.getString("title"));
-                                            fauctionDo.setResidual_time(temp.getString("residual_time"));
-                                            fauctionDo.setNum(temp.getString("num"));
-                                            fauctionDo.setUnit(temp.getString("unit"));
-                                            fauctionDo.setStatus(temp.getInteger("status"));
-                                            fauctionDo.setStock(temp.getString("stock"));
-                                            fauctionDo.setTitle_img(temp.getString("pic"));
-                                            fauctionDos.add(fauctionDo);
-                                        }
-
-
-                                        if (isFlash) {
-                                            mDataAdapter = new CategoryDoingAdapter(getActivity(), fauctionDos);
-                                            xListView.setAdapter(mDataAdapter);
-                                        } else {
-                                            mDataAdapter.notifyDataSetChanged();
-                                        }
-                                        onLoad();
-                                        // mStartNo=startNo+pageSize;
-                                        //页数自增1
-                                        mPage++;
-                                        isFirst = false;
                                     }
 
+                                    @Override
+                                    public void onResponse(String response) {
+
+                                        Logger.i(TAG + "45646456456====", response);
+                                        if (isFirst) {
+                                            if (((CategoryDoingTabActivity) getActivity()) != null) {
+                                                ((CategoryDoingTabActivity) getActivity()).dismiss();
+                                            }
+                                        }
+
+                                        if (isFlash)
+                                            fauctionDos = new ArrayList<FauctionDo>();
+                                        //json解析
+                                        JSONObject jsonObject = JSONObject.parseObject(response);
+                                        int code = jsonObject.getIntValue("code");
+                                        if (code == 0) {
+                                            JSONObject data = jsonObject.getJSONObject("data");
+                                            mPageSize = jsonObject.getInteger("total_page");
+                                            for (int i = 0; i < REQUEST_COUNT; i++) {
+                                                int j = i + 1;
+                                                JSONObject temp = data.getJSONObject(j + "") ;
+                                                if (temp == null) {
+                                                    break;
+                                                }
+
+                                                FauctionDo fauctionDo = new FauctionDo();
+                                                fauctionDo.setCurPrice(temp.getString("current_price"));
+                                                fauctionDo.setId(temp.getShort("id"));
+                                                fauctionDo.setTitle(temp.getString("title"));
+                                                fauctionDo.setResidual_time(temp.getString("residual_time"));
+                                                fauctionDo.setNum(temp.getString("num"));
+                                                fauctionDo.setUnit(temp.getString("unit"));
+                                                fauctionDo.setStatus(temp.getInteger("status"));
+                                                fauctionDo.setStock(temp.getString("stock"));
+                                                fauctionDo.setTitle_img(temp.getString("pic"));
+                                                fauctionDos.add(fauctionDo);
+                                            }
 
 
-                                }
-                            });
-                }
-            }else{
-                if(pageSize<=mPageSize){
-                    String timestamp= DateUtil.getStringDate();
+                                            if (isFlash) {
+                                                mDataAdapter = new CategoryDoingAdapter(getActivity(), fauctionDos);
+                                                xListView.setAdapter(mDataAdapter);
+                                            } else {
+                                                mDataAdapter.notifyDataSetChanged();
+                                            }
+                                            onLoad();
+                                            // mStartNo=startNo+pageSize;
+                                            //页数自增1
+                                            mPage++;
+                                            isFirst = false;
+                                        }
 
-                    String sign= Util.createSign(getActivity(),timestamp,"Product","deal");
 
-                    OkHttpUtils.post()
-                            .url(Constant.PRODUCT_DEAL)
-                            .addParams("sign", sign).addParams("codes", ConfigUserManager.getToken(getContext()))
-                            .addParams("timestamp",timestamp)
-                            .addParams("client_id", ConfigUserManager.getUnicodeIEME(getActivity()))
-                            .addParams("user_id",ConfigUserManager.getUserId(getActivity()))
-                            .addParams("id",URLEncoder.encode(category.getId()))
-                            .addParams("page",String.valueOf(pageSize))
-                            .addParams("order",order+"")
-                            .build()
-                            .execute(new StringCallback() {
-                                @Override
-                                public void onError(Call call, Exception e) {
 
-                                }
+                                    }
+                                });
+                    }
+                }else{
+                    if(pageSize<=mPageSize){
+                        String timestamp= DateUtil.getStringDate();
 
-                                @Override
-                                public void onResponse(String response) {
+                        String sign= Util.createSign(getActivity(),timestamp,"Product","deal");
 
-                                    Logger.i(TAG+"45646456456====",response);
+                        OkHttpUtils.post()
+                                .url(Constant.PRODUCT_DEAL)
+                                .addParams("sign", sign).addParams("codes", ConfigUserManager.getToken(getContext()))
+                                .addParams("timestamp",timestamp)
+                                .addParams("client_id", ConfigUserManager.getUnicodeIEME(getActivity()))
+                                .addParams("user_id",ConfigUserManager.getUserId(getActivity()))
+                                .addParams("id",URLEncoder.encode(category.getId()))
+                                .addParams("page",String.valueOf(pageSize))
+                                .addParams("order",order+"")
+                                .build()
+                                .execute(new StringCallback() {
+                                    @Override
+                                    public void onError(Call call, Exception e) {
+
+                                    }
+
+                                    @Override
+                                    public void onResponse(String response) {
+
+                                        Logger.i(TAG+"45646456456====",response);
+                                        if (isFirst) {
+                                            if (((CategoryDoingTabActivity) getActivity()) != null) {
+                                                ((CategoryDoingTabActivity) getActivity()).dismiss();
+                                            }
+                                        }
 //                                    if(isFirst)
 //                                        ((CategoryDoingTabActivity)getActivity()).dismiss();
 
-                                    if(isFlash)
-                                        fauctionDos = new ArrayList<FauctionDo>();
-                                    //json解析
-                                    JSONObject jsonObject=JSONObject.parseObject(response);
-                                    String strData=jsonObject.getString("data");
-                                    int code = jsonObject.getIntValue("code");
-                                    if(code!=-1){
-                                        JSONObject data = jsonObject.getJSONObject("data");
-                                        mPageSize=jsonObject.getInteger("total_page");
-                                        for(int i=0;i<REQUEST_COUNT;i++){
-                                            int j=i+1;
-                                            JSONObject temp=data.getJSONObject(j+"");
-                                            if(temp==null){
-                                                break;
+                                        if(isFlash)
+                                            fauctionDos = new ArrayList<FauctionDo>();
+                                        //json解析
+                                        JSONObject jsonObject=JSONObject.parseObject(response);
+                                        String strData=jsonObject.getString("data");
+                                        int code = jsonObject.getIntValue("code");
+                                        if(code!=-1){
+                                            JSONObject data = jsonObject.getJSONObject("data");
+                                            mPageSize=jsonObject.getInteger("total_page");
+                                            for(int i=0;i<REQUEST_COUNT;i++){
+                                                int j=i+1;
+                                                JSONObject temp=data.getJSONObject(j+"");
+                                                if(temp==null){
+                                                    break;
+                                                }
+
+                                                FauctionDo fauctionDo=new FauctionDo();
+                                                fauctionDo.setCurPrice(temp.getString("current_price"));
+                                                fauctionDo.setId(temp.getShort("id"));
+                                                fauctionDo.setTitle(temp.getString("title"));
+                                                fauctionDo.setResidual_time(temp.getString("residual_time"));
+                                                fauctionDo.setNum(temp.getString("num"));
+                                                fauctionDo.setUnit(temp.getString("unit"));
+                                                fauctionDo.setStatus(temp.getInteger("status"));
+                                                fauctionDo.setStock(temp.getString("stock"));
+                                                fauctionDo.setTitle_img(temp.getString("pic"));
+                                                fauctionDos.add(fauctionDo);
                                             }
 
-                                            FauctionDo fauctionDo=new FauctionDo();
-                                            fauctionDo.setCurPrice(temp.getString("current_price"));
-                                            fauctionDo.setId(temp.getShort("id"));
-                                            fauctionDo.setTitle(temp.getString("title"));
-                                            fauctionDo.setResidual_time(temp.getString("residual_time"));
-                                            fauctionDo.setNum(temp.getString("num"));
-                                            fauctionDo.setUnit(temp.getString("unit"));
-                                            fauctionDo.setStatus(temp.getInteger("status"));
-                                            fauctionDo.setStock(temp.getString("stock"));
-                                            fauctionDo.setTitle_img(temp.getString("pic"));
-                                            fauctionDos.add(fauctionDo);
+
+                                            if(isFlash){
+                                                mDataAdapter=new CategoryDoingAdapter(getActivity(), fauctionDos);
+                                                xListView.setAdapter(mDataAdapter);
+                                            }else{
+                                                mDataAdapter.notifyDataSetChanged();
+                                            }
+                                            onLoad();
+                                            // mStartNo=startNo+pageSize;
+                                            //页数自增1
+                                            mPage++;
+                                            isFirst=false;
                                         }
 
 
-                                        if(isFlash){
-                                            mDataAdapter=new CategoryDoingAdapter(getActivity(), fauctionDos);
-                                            xListView.setAdapter(mDataAdapter);
-                                        }else{
-                                            mDataAdapter.notifyDataSetChanged();
-                                        }
-                                        onLoad();
-                                        // mStartNo=startNo+pageSize;
-                                        //页数自增1
-                                        mPage++;
-                                        isFirst=false;
+
                                     }
 
 
-
-                                }
-
-
-                            });
+                                });
+                    }
                 }
             }
+
 
 
 

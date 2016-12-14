@@ -77,7 +77,7 @@ public class MyHaveFauctionDoingAdapter extends BaseAdapter {
         }
         viewHolder.title.setText(fauctionDos.get(position).getTitle());
         viewHolder.curPrice.setText("￥" + fauctionDos.get(position).getCurrent_price() + "/"+fauctionDos.get(position).getUnit());
-        viewHolder.remindNum.setText(fauctionDos.get(position).getStock() + fauctionDos.get(position).getUnit());
+        viewHolder.remindNum.setText(fauctionDos.get(position).getTotal()+fauctionDos.get(position).getUnit());
         viewHolder.remindTime.setText(fauctionDos.get(position).getPay_time());
         if (fauctionDos.get(position).getShoot_type() == 1) {
             viewHolder.price_state.setBackgroundResource(R.drawable.price_up);

@@ -305,6 +305,9 @@ public class LoginFragment extends Fragment {
                                 Intent intent=new Intent(getActivity(), ProductFauctionDetailPreActivity.class);
                                 intent.putExtra("productId",Common.proId);
                                 getActivity().startActivity(intent);
+                            }else if(Common.whichActivity==3){
+                                //用户中心跳转过来
+                                ((MainActivity) getActivity()).mTabHost.setCurrentTab(4);
                             }else{
                                 ((MainActivity) getActivity()).mTabHost.setCurrentTab(0);
 

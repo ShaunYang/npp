@@ -4,10 +4,10 @@ package com.zhuoyi.fauction.net;
  * Created by Administrator on 2016/5/23.
  */
 public class Constant {
-   public static String HOST="http://api.nongpaipai.cn/";
+    public static String HOST="http://api.nongpaipai.cn/";
    //public static String HOST="http://test.nongpaipai.cn/";
     public static String PORT="82";
-    public static String VERSION="/V4";
+    public static String VERSION="/V5";
     //public static String VERSION="/api";
     public static String URL=HOST+VERSION;
     //用户安装注册app
@@ -136,9 +136,10 @@ public class Constant {
     public static String PAY_WYZF=URL+"?kind=Pay&method=wyzf";
 
     //开放环境前端消息推送接口
-   // public static String FRONT_PUSH="http://114.55.88.233:2256";
+    //public static String FRONT_PUSH="http://114.55.88.233:2256";
      //正式环境前端消息推送接口
-     public static String FRONT_PUSH="http://114.55.88.233:2120";
+    public static String FRONT_PUSH="http://114.55.88.233:2120";
+
 
    //获取帅选联动菜单数据
    public static String CO_GETBASE=URL+"?kind=Co&method=getBase";
@@ -169,4 +170,19 @@ public class Constant {
 
     //保证金钱包支付及保证金为0的提交接口
     public static String WALLET_PAYBOND=URL+"?kind=Wallet&method=payBond";
+
+ //商品详情
+ public static String PRODUCT_DETAIL=URL+"/new/view/id/";
+
+ //
+ public static String PRODUCT_KNOW=URL+"/new/index/id/";
+
+ //拍卖协议
+ public static String XIEYI=URL+"/new/index/id/2";
+ //抵用券使用说明
+ public static String PICKET_HELP=URL+"/new/index/id/6";
+ //注册协议
+ public static String REGIST_XIEYI=URL+"/new/index/id/1";
+ //联系我们
+ public static String CONTACTS_US="http://api.nongpaipai.cn/lxwm/";
 }

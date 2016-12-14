@@ -4,6 +4,7 @@ package com.zhuoyi.fauction.ui.other;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -101,12 +102,21 @@ public class AreaActivity extends BaseActivity implements OnWheelChangedListener
 		if (wheel == mViewProvince) {
 			updateCities();
 		} else if (wheel == mViewCity) {
+			if(city==null){
+				return;
+			}
 			updateAreas();
 		} else if (wheel == mViewDistrict) {
-			List<Area.ProvinceBean.CityBean.AreaBean> areas = city.getArea();
-			Area.ProvinceBean.CityBean.AreaBean areaBean = areas.get(newValue);
-			mCurrentDistrictName=areaBean.getName();
-			Common.area=areaBean;
+			if(city!=null){
+				List<Area.ProvinceBean.CityBean.AreaBean> areas = city.getArea();
+				Area.ProvinceBean.CityBean.AreaBean areaBean = areas.get(newValue);
+				mCurrentDistrictName=areaBean.getName();
+				Common.area=areaBean;
+			}else{
+				mCurrentDistrictName="";
+				Common.area=null;
+			}
+
 //			for(Area.ProvinceBean.CityBean.AreaBean areaT:areas){
 //				if(areaT.getName().equals(newValue)){
 //					area=areaT;
@@ -152,23 +162,49 @@ public class AreaActivity extends BaseActivity implements OnWheelChangedListener
 
 
 		if(cityb!=null){
-			city =province.getCity().get(pCurrent);
-			Common.city=city;
-			mCurrentCityName = this.city.getName();
-			Common.area=city.getArea().get(0);
-			mCurrentDistrictName=Common.area.getName();
+			if(province.getCity().size()<=0){
+				Common.city=null;
+				mCurrentCityName ="";
+				Common.area=null;
+				Common.province=province;
+				mCurrentDistrictName="";
+				area=null;
+				city=null;
+			}else{
+				city =province.getCity().get(pCurrent);
+				Common.city=city;
+				mCurrentCityName = this.city.getName();
+				if(city.getArea().size()<=0){
+					Common.area=null;
+					area=null;
+					mCurrentDistrictName="";
+				}else{
+					Common.area=city.getArea().get(0);
+					mCurrentDistrictName=Common.area.getName();
+				}
+
+			}
+
+
 			List<String> areaList=new ArrayList<String>();
-			for(Area.ProvinceBean.CityBean.AreaBean areaBean: this.city.getArea()){
-				areaList.add(areaBean.getName());
-			}
-			String[] areas =areaList.toArray(new String[areaList.size()]);
+			if(city!=null){
+				for(Area.ProvinceBean.CityBean.AreaBean areaBean: this.city.getArea()){
+					areaList.add(areaBean.getName());
+				}
+				String[] areas =areaList.toArray(new String[areaList.size()]);
 
-			if (areas == null) {
-				areas = new String[] { "" };
+				if (areas == null) {
+					areas = new String[] { "" };
+				}
+
+				mViewDistrict.setViewAdapter(new ArrayWheelAdapter<String>(AreaActivity.this, areas));
+				mViewDistrict.setCurrentItem(0);
+			}else{
+				//areas = new String[] { "" };
+				mViewDistrict.setViewAdapter(new ArrayWheelAdapter<String>(AreaActivity.this, new String[] { "" }));
+				mViewDistrict.setCurrentItem(0);
 			}
 
-			mViewDistrict.setViewAdapter(new ArrayWheelAdapter<String>(AreaActivity.this, areas));
-			mViewDistrict.setCurrentItem(0);
 		}
 
 	}
@@ -179,9 +215,31 @@ public class AreaActivity extends BaseActivity implements OnWheelChangedListener
 	private void updateCities() {
 		int pCurrent = mViewProvince.getCurrentItem();
 		province = areas.get(pCurrent).getProvince();
-		Common.area=province.getCity().get(0).getArea().get(0);
-		mCurrentDistrictName=Common.area.getName();
 		Common.province=province;
+		int size = province.getCity().size();
+		Logger.i("areactivity_provincesize=", size + "");
+//		Logger.i("areactivity_provinceareasize=", province.getCity().get(0).getArea().size() + "");
+		//Log.i("areactivity_provincesize=", size + "");
+		if(size<=0){
+			//mCurrentDistrictName="";
+
+			Common.area=null;
+			Common.city=null;
+			city=null;
+		}else{
+			if(province.getCity().get(0).getArea().size()<=0){
+				Common.area=null;
+				Common.city=province.getCity().get(0);
+				mCurrentDistrictName="";
+			}else{
+				Common.area=province.getCity().get(0).getArea().get(0);
+				mCurrentDistrictName=Common.area.getName();
+			}
+
+		}
+
+
+		//Common.province=province;
 		mCurrentProviceName = province.getName();
 		mCurrentProviceNameId=province.getId();
 		List<String> cityList=new ArrayList<String>();

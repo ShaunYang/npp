@@ -76,12 +76,12 @@ public class SelectPricePopWindow extends PopupWindow{
             edit_price.setFocusable(true);
             edit_price.setFocusableInTouchMode(true);
         }else if(state==2){
-            popPrice.setVisibility(View.GONE);
-            pop_price_title.setVisibility(View.GONE);
-            priceAdd.setVisibility(View.GONE);
-            priceCut.setVisibility(View.GONE);
-            edit_price.setFocusable(false);
-            edit_price.setFocusableInTouchMode(false);
+            popPrice.setVisibility(View.VISIBLE);
+            pop_price_title.setVisibility(View.VISIBLE);
+            priceAdd.setVisibility(View.VISIBLE);
+            priceCut.setVisibility(View.VISIBLE);
+            edit_price.setFocusable(true);
+            edit_price.setFocusableInTouchMode(true);
         }
 
 

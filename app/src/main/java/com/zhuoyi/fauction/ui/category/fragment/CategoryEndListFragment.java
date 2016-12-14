@@ -187,8 +187,12 @@ public class CategoryEndListFragment extends Fragment implements View.OnClickLis
                                 public void onResponse(String response) {
 
                                     Logger.i(TAG + "45646456456====", response);
-                                    if (isFirst)
-                                        ((CategoryEndTabActivity) getActivity()).dismiss();
+                                    if (isFirst){
+                                        if( ((CategoryEndTabActivity) getActivity())!=null){
+                                            ((CategoryEndTabActivity) getActivity()).dismiss();
+                                        }
+                                    }
+
 
                                     if (isFlash)
                                         fauctionDos = new ArrayList<FauctionDo>();
@@ -262,8 +266,11 @@ public class CategoryEndListFragment extends Fragment implements View.OnClickLis
                                 public void onResponse(String response) {
 
                                     Logger.i(TAG+"45646456456====",response);
-                                    if(isFirst)
-                                        ((CategoryEndTabActivity)getActivity()).dismiss();
+                                    if (isFirst){
+                                        if( ((CategoryEndTabActivity) getActivity())!=null){
+                                            ((CategoryEndTabActivity) getActivity()).dismiss();
+                                        }
+                                    }
 
                                     if(isFlash)
                                         fauctionDos = new ArrayList<FauctionDo>();

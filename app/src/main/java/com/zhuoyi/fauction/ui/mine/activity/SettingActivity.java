@@ -55,6 +55,11 @@ public class SettingActivity extends BaseActivity {
         startActivity(intent);
     }
 
+    @OnClick(R.id.to_contact) void toContactClick() {
+        Intent intent=new Intent(SettingActivity.this,ContactUsActivity.class);
+        startActivity(intent);
+    }
+
 
 
     @Override

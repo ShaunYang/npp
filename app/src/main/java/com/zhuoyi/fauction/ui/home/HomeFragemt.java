@@ -74,7 +74,7 @@ import okhttp3.Call;
 
 public class HomeFragemt extends Fragment {
 
-    @Bind(R.id.ssv_top_ad)
+   @Bind(R.id.ssv_top_ad)
     SlideShowView ssvTopAd;
 
     @Bind(R.id.home_iv_zxcj)
@@ -403,6 +403,7 @@ public class HomeFragemt extends Fragment {
                             mainBanner.setId(bannerJsonObj.getInteger("id"));
                             mainBanner.setUrl(bannerJsonObj.getString("url"));
                             mainBanner.setStatus(bannerJsonObj.getInteger("status"));
+                            mainBanner.setType(bannerJsonObj.getInteger("type"));
                             mainBanners.add(mainBanner);
                             mImgBannerUrl.add(bannerJsonObj.getString("pic_url"));
 

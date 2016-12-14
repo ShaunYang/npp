@@ -58,6 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
+                    android:id="@id/id_stickynavlayout_topview"
                     android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -297,7 +298,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
 
-                                android:text="延时周期:"/>
+                                android:text="拍卖周期:"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -315,7 +316,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1">
-                            <TextView
+                            <!--<TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
 
@@ -325,7 +326,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="4dp"
                                 android:text="￥0.01/10分钟"
-                                android:id="@+id/jiangjiafudu" />
+                                android:id="@+id/jiangjiafudu" />-->
                         </LinearLayout>
 
                     </LinearLayout>
@@ -467,7 +468,7 @@
                 <com.zhuoyi.fauction.view.PagerSlidingTabStrip
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:id="@+id/tabs"
+                    android:id="@id/id_stickynavlayout_indicator"
                     android:layout_marginTop="10dp"
                     app:pstsIndicatorColor="@color/txt_color_green"
                     app:pstsIndicatorHeight="2dp"
@@ -478,10 +479,10 @@
                     app:zmsSelectedTabTextSize="12dp"
                     app:pstsDividerColor="@android:color/transparent"
                     app:pstsShouldExpand="true"></com.zhuoyi.fauction.view.PagerSlidingTabStrip>
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/viewPagers"
+                <com.zhuoyi.fauction.view.CustomViewPager
+                    android:id="@id/id_stickynavlayout_viewpager"
                     android:layout_width="match_parent"
-                    android:layout_height="8000dp"></android.support.v4.view.ViewPager>
+                    android:layout_height="wrap_content"></com.zhuoyi.fauction.view.CustomViewPager>
             </LinearLayout>
 
 

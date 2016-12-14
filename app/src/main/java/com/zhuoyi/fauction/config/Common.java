@@ -6,6 +6,7 @@ import com.zhuoyi.fauction.model.Area;
 import com.zhuoyi.fauction.model.Category;
 import com.zhuoyi.fauction.model.MyPicketSel;
 import com.zhuoyi.fauction.model.ProductDetail2;
+import com.zhuoyi.fauction.view.CustomViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ public class Common {
 
     public static String userAvator;
 
-    public static String nonextpageText="无下一页数据";
+    public static String nonextpageText="";
 
     //
     public static String reg_phone;
@@ -50,7 +51,7 @@ public class Common {
 
     public static int home_tab=0;
 
-    public static String packingId="0";
+    public static String packingId="";
 
     public static boolean isALLSelect=false;
 
@@ -70,5 +71,6 @@ public class Common {
 
     public static boolean isOrderEqulsZero=false;
     //
+    public static CustomViewPager viewPagers=null;
 
 }

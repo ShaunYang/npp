@@ -1,5 +1,6 @@
 package com.zhuoyi.fauction.ui.home.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -12,18 +13,21 @@ import android.view.ViewGroup;
 import com.zhuoyi.fauction.R;
 import com.zhuoyi.fauction.event.BusProvider;
 import com.zhuoyi.fauction.ui.home.adapter.HomeTabItemAdapter;
+import com.zhuoyi.fauction.view.CustomViewPager;
 
 import butterknife.ButterKnife;
 
-
+@SuppressLint("ValidFragment")
 public class FauctionStepFragment extends Fragment {
 
     private View viewHolder;
     private RecyclerView allRecycle;
-    ViewPager viewPager;
-    public static FauctionStepFragment newInstance(String param1, String param2) {
-        FauctionStepFragment fragment = new FauctionStepFragment();
-        return fragment;
+    CustomViewPager viewPager;
+
+
+
+    public FauctionStepFragment(CustomViewPager viewPager) {
+        this.viewPager = viewPager;
     }
 
     @Override
@@ -32,6 +36,7 @@ public class FauctionStepFragment extends Fragment {
         // Inflate the layout for this fragment
         if (viewHolder == null) {
             viewHolder = inflater.inflate(R.layout.fragment_fauction_step, container, false);
+            viewPager.setObjectForPosition(viewHolder,2);
             ButterKnife.bind(this, viewHolder);
             BusProvider.getInstance().register(this);
              initComponent();
@@ -41,7 +46,17 @@ public class FauctionStepFragment extends Fragment {
             parent.removeView(viewHolder);
         }
         ButterKnife.bind(this, viewHolder);
+
         return viewHolder;
+
+    }
+
+    public ViewPager getViewPager() {
+        return viewPager;
+    }
+
+    public void setViewPager(CustomViewPager viewPager) {
+        this.viewPager = viewPager;
     }
 
     private void initComponent(){

@@ -10,6 +10,15 @@ public class MainBanner {
     private String url;
     private Integer id;
     private Integer status;
+    private Integer type;
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
     public Integer getStatus() {
         return status;

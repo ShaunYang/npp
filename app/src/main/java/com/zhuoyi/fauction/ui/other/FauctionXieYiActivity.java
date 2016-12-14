@@ -137,7 +137,7 @@ public class FauctionXieYiActivity extends BaseActivity {
 		webview.getSettings().setAllowFileAccess(true);
 
 		// 加载index.html
-		webview.loadUrl("http://api.nongpaipai.cn/v1/new/index/id/2");
+		webview.loadUrl(Constant.XIEYI);
 
 	}
 

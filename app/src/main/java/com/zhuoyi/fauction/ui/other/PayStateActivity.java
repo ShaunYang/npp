@@ -14,10 +14,12 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
+import com.zhuoyi.fauction.model.RecommondPo;
 import com.zhuoyi.fauction.ui.BaseActivity;
 import com.yintai.common.util.Logger;
 import com.yintai.common.util.ToastUtil;
@@ -42,6 +44,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -81,6 +84,8 @@ public class PayStateActivity extends BaseActivity {
 	boolean flag;
 
 	String oid;
+
+	ArrayList<RecommondPo> fauctionDos=new ArrayList<RecommondPo>();;
 
 	@Override
 	protected void initComponent(Bundle bundle) {
@@ -215,10 +220,24 @@ public class PayStateActivity extends BaseActivity {
 					@Override
 					public void onResponse(String response) {
 						Logger.i(TAG + "pay_state", response);
-						Gson gson = new Gson();
-						ReminderPo reminderPo=gson.fromJson(response,ReminderPo.class);
-						if(reminderPo.getCode()==0){
-							gridview.setAdapter(new MyGridAdapter(PayStateActivity.this,reminderPo.getData()));
+						JSONObject jsonObject = JSONObject.parseObject(response);
+						int code = jsonObject.getIntValue("code");
+						if (code==0) {
+							JSONObject data = jsonObject.getJSONObject("data");
+
+							for (int i = 0; i < 6; i++) {
+								int j = i + 1;
+								JSONObject temp = data.getJSONObject(j + "");
+								if (temp == null) {
+									break;
+								}
+
+								Gson gson = new Gson();
+								String s = JSON.toJSONString(temp);
+								RecommondPo myHaveFauction = gson.fromJson(s, RecommondPo.class);
+								fauctionDos.add(myHaveFauction);
+							}
+							gridview.setAdapter(new MyGridAdapter(PayStateActivity.this,fauctionDos));
 							gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 								@Override
 								public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -226,6 +245,8 @@ public class PayStateActivity extends BaseActivity {
 								}
 							});
 						}
+
+
 
 					}
 				});

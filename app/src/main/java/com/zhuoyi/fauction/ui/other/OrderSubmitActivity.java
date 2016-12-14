@@ -5,6 +5,9 @@ package com.zhuoyi.fauction.ui.other;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StrikethroughSpan;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -35,6 +38,7 @@ import com.zhuoyi.fauction.model.Area;
 import com.zhuoyi.fauction.model.Order;
 import com.zhuoyi.fauction.model.Ret;
 import com.zhuoyi.fauction.net.Constant;
+import com.zhuoyi.fauction.ui.MainActivity;
 import com.zhuoyi.fauction.utils.DateUtil;
 import com.zhuoyi.fauction.utils.MD5Util;
 import com.zhuoyi.fauction.utils.Util;
@@ -73,6 +77,7 @@ public class OrderSubmitActivity extends BaseActivity {
 	@Bind(R.id.cj_all_price) TextView cjAllPrice;
 	@Bind(R.id.yongjing) TextView yongjing;
 	@Bind(R.id.baozhengjing) TextView baozhengjing;
+	@Bind(R.id.commitionTx) TextView commitionTx;
 	/*@Bind(R.id.pack)
 	RadioGroup pack;
 	@Bind(R.id.pack_zx)
@@ -186,7 +191,16 @@ public class OrderSubmitActivity extends BaseActivity {
 	@OnClick(R.id.back) void onBackClick() {
 		//TODO implement
 		Common.isOrderEqulsZero=false;
-		onBackPressed();
+		if(Common.whichActivity==1){
+			Intent intent=new Intent();
+			intent.putExtra("tab",2);
+			Common.whichActivity=1;
+			intent.setClass(OrderSubmitActivity.this, MainActivity.class);
+			startActivity(intent);
+			finish();
+		}else{
+			onBackPressed();
+		}
 	}
 
 	private View.OnClickListener itemsOnClick=new View.OnClickListener() {
@@ -331,8 +345,8 @@ public class OrderSubmitActivity extends BaseActivity {
 				.execute(new StringCallback() {
 					@Override
 					public void onError(Call call, Exception e) {
-
 					}
+
 
 					@Override
 					public void onResponse(String response) {
@@ -349,7 +363,19 @@ public class OrderSubmitActivity extends BaseActivity {
 								cjPrice.setText("￥" + data.getPrice() + "/" + data.getUnit());
 								cjNum.setText(data.getNum() + data.getUnit());
 								cjAllPrice.setText("￥" + data.getTotal_price());
-								yongjing.setText("￥" + data.getCommission());
+								double commission = Double.parseDouble(data.getCommission());
+								//判断佣金是否小于等于0
+								if(commission<=0){
+									String string="佣金";
+									SpannableString sp = new SpannableString(string);
+									sp.setSpan(new StrikethroughSpan(), 0, string.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+									commitionTx.setText(sp);
+									yongjing.setText("推广期间，佣金全免");
+
+								}else{
+									yongjing.setText("￥" + data.getCommission());
+								}
+
 								baozhengjing.setText("￥" + data.getBond());
 								String pack = data.getPack();
 								/*packZx.setText(data.getPacking().getValue1());
@@ -452,6 +478,7 @@ public class OrderSubmitActivity extends BaseActivity {
 								idx=data.getId();
 								expressx=String.valueOf(data.getExpress());
 								commissionx=data.getCommission();
+
 								insurancex=String.valueOf(data.getInsurance());
 								receipt_idx=data.getReceipt().getId();
 								// totalx=data.getTotal_price();
@@ -592,7 +619,7 @@ public class OrderSubmitActivity extends BaseActivity {
 					String timestamp= DateUtil.getStringDate();
 
 					String sign = Util.createSign(OrderSubmitActivity.this, timestamp, "Order", "submitOrder");
-					String key= MD5Util.getMD5String(idx+receipt_idx+Common.packingId+totalP);
+					String key= MD5Util.getMD5String(idx+receipt_idx+totalP);
 					OkHttpUtils.post()
 							.url(Constant.ORDER_SUBMITORDER)
 							.addParams("sign", sign).addParams("codes", ConfigUserManager.getToken(OrderSubmitActivity.this))
@@ -669,7 +696,7 @@ public class OrderSubmitActivity extends BaseActivity {
 					String timestamp= DateUtil.getStringDate();
 
 					String sign = Util.createSign(OrderSubmitActivity.this, timestamp, "Order", "submitOrder");
-					String key= MD5Util.getMD5String(idx+receipt_idx+Common.packingId+totalP);
+					String key= MD5Util.getMD5String(idx+receipt_idx+totalP);
 					OkHttpUtils.post()
 							.url(Constant.ORDER_SUBMITORDER)
 							.addParams("sign", sign).addParams("codes", ConfigUserManager.getToken(OrderSubmitActivity.this))
@@ -730,7 +757,7 @@ public class OrderSubmitActivity extends BaseActivity {
 				String timestamp= DateUtil.getStringDate();
 
 				String sign = Util.createSign(OrderSubmitActivity.this, timestamp, "Order", "submitOrder");
-				String key= MD5Util.getMD5String(idx+receipt_idx+Common.packingId+totalP);
+				String key= MD5Util.getMD5String(idx+receipt_idx+totalP);
 				OkHttpUtils.post()
 						.url(Constant.ORDER_SUBMITORDER)
 						.addParams("sign", sign).addParams("codes", ConfigUserManager.getToken(OrderSubmitActivity.this))

@@ -70,7 +70,7 @@ public class ProductFauctionDetailEndActivity extends BaseActivity {
     @Bind(R.id.jiafu) TextView jiafu;
     @Bind(R.id.isbaoliu) TextView isbaoliu;
     @Bind(R.id.yanshizhouqi) TextView yanshizhouqi;
-    @Bind(R.id.jiangjiafudu) TextView jiangjiafudu;
+   // @Bind(R.id.jiangjiafudu) TextView jiangjiafudu;
     @Bind(R.id.kaipaishijian)
     TextView kaipaishijian;
     //@Bind(R.id.jieshushijian) TextView jieshushijian;
@@ -81,9 +81,9 @@ public class ProductFauctionDetailEndActivity extends BaseActivity {
     @Bind(R.id.more_paimaijilu) TextView morePaimaijilu;
     @Bind(R.id.paimairecycleview)
     ListView paimairecycleview;
-    @Bind(R.id.tabs) PagerSlidingTabStrip tabs;
-    @Bind(R.id.viewPagers)
-    ViewPager viewPagers;
+    @Bind(R.id.id_stickynavlayout_indicator) PagerSlidingTabStrip tabs;
+    @Bind(R.id.id_stickynavlayout_viewpager)
+    CustomViewPager viewPagers;
 
     @Bind(R.id.price_state) ImageView priceState;
 
@@ -227,9 +227,32 @@ public class ProductFauctionDetailEndActivity extends BaseActivity {
 //        tixinPost();
 //
 //    }
+@Override
+public void onBackPressed() {
+    if(Common.whichActivity==1){
+        Intent intent=new Intent();
+        intent.putExtra("tab",2);
+        Common.whichActivity=1;
+        intent.setClass(ProductFauctionDetailEndActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }else{
+        super.onBackPressed();
+    }
 
+
+}
     @OnClick(R.id.back) void onBackClick() {
-        onBackPressed();
+        if(Common.whichActivity==1){
+            Intent intent=new Intent();
+            intent.putExtra("tab",2);
+            Common.whichActivity=1;
+            intent.setClass(ProductFauctionDetailEndActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            onBackPressed();
+        }
     }
 
 
@@ -453,10 +476,27 @@ public class ProductFauctionDetailEndActivity extends BaseActivity {
                             if (productDetail2 != null) {
                                 Common.productDetail2 = productDetail2;
                                 viewPagers.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-                                tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+                                tabs = (PagerSlidingTabStrip) findViewById(R.id.id_stickynavlayout_indicator);
                                 tabs.setViewPager(viewPagers);
                                 tabs.setDividerColor(0xFFFFFF);
                                 viewPagers.setCurrentItem(0);
+                                tabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                                    @Override
+                                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                                    }
+
+                                    @Override
+                                    public void onPageSelected(int position) {
+                                        viewPagers.resetHeight(position);
+                                    }
+
+                                    @Override
+                                    public void onPageScrollStateChanged(int state) {
+
+                                    }
+                                });
+                                viewPagers.resetHeight(0);
                                 auctionDetailRecordPost(proId);
                             }
 
@@ -529,7 +569,7 @@ public class ProductFauctionDetailEndActivity extends BaseActivity {
                                 isbaoliu.setText("无");
                             }
                             yanshizhouqi.setText(data.getDelayed()+"分钟/次");
-                            jiangjiafudu.setText("￥"+data.getCut_price()+"/"+data.getPrice_cycle()+"分钟");
+                           // jiangjiafudu.setText("￥"+data.getCut_price()+"/"+data.getPrice_cycle()+"分钟");
                             price_fd=Float.parseFloat(data.getCut_price());
                             kaipaishijian.setText(data.getShoot_time());
                             //jieshushijian.setText(data.getEnd_time());
@@ -554,7 +594,30 @@ public class ProductFauctionDetailEndActivity extends BaseActivity {
                                 mImgBannerUrl.add(pictureBean.getPic_name());
                             }
                             topAd.setView(mImgBannerUrl.toArray(new String[mImgBannerUrl.size()]));
-                            detailSecondPagePost(proId);
+                           // detailSecondPagePost(proId);
+                            viewPagers.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+                            tabs = (PagerSlidingTabStrip) findViewById(R.id.id_stickynavlayout_indicator);
+                            tabs.setViewPager(viewPagers);
+                            tabs.setDividerColor(0xFFFFFF);
+                            viewPagers.setCurrentItem(0);
+                            tabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                                @Override
+                                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                                }
+
+                                @Override
+                                public void onPageSelected(int position) {
+                                    viewPagers.resetHeight(position);
+                                }
+
+                                @Override
+                                public void onPageScrollStateChanged(int state) {
+
+                                }
+                            });
+                            viewPagers.resetHeight(0);
+                            auctionDetailRecordPost(proId);
                         }
 
 
@@ -697,17 +760,17 @@ public class ProductFauctionDetailEndActivity extends BaseActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    fauctionDetailFragment = new FauctionDetailFragment();
-                    fauctionDetailFragment.setViewPager(viewPagers);
+                    fauctionDetailFragment = new FauctionDetailFragment(viewPagers);
+
                    // mainCategory.setTitle(title[0]);
                     return fauctionDetailFragment;
                 case 1:
-                    fauctionKnowFragment = new FauctionKnowFragment();
-                    fauctionDetailFragment.setViewPager(viewPagers);
+                    fauctionKnowFragment = new FauctionKnowFragment(viewPagers);
+
                    // mainCategory.setTitle(title[1]);
                     return fauctionKnowFragment;
                 case 2:
-                    fauctionStepFragment = new FauctionStepFragment();
+                    fauctionStepFragment = new FauctionStepFragment(viewPagers);
                     //mainCategory.setTitle(title[2]);
                     return fauctionStepFragment;
 

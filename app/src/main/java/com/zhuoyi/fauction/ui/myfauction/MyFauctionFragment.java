@@ -81,30 +81,33 @@ public class MyFauctionFragment extends Fragment {
 
     private void initComponent(){
         Common.whichActivity=0;
-        viewPager = (ViewPager) viewHolder.findViewById(R.id.viewPager);
-       // viewPager.setAdapter(new MyPagerAdapter(getFragmentManager()));
+        if(viewHolder!=null){
+            viewPager = (ViewPager) viewHolder.findViewById(R.id.viewPager);
+            // viewPager.setAdapter(new MyPagerAdapter(getFragmentManager()));
 
-        PagerAdapter adapter = viewPager.getAdapter();
-        if(adapter==null){
-            new Handler().postDelayed(new Runnable() {
+            PagerAdapter adapter = viewPager.getAdapter();
+            if(adapter==null){
+                new Handler().postDelayed(new Runnable() {
 
-                @Override
-                public void run() {
-                    // TODO Auto-generated method stub
-                    MyFauctionFragment.this.adapter = new MyPagerAdapter(getFragmentManager());
-                    viewPager.setAdapter(MyFauctionFragment.this.adapter);
-                    tabs = (PagerSlidingTabStrip) viewHolder.findViewById(R.id.tabs);
-                    tabs.setViewPager(viewPager);
-                    tabs.setDividerColor(0xFFFFFF);
+                    @Override
+                    public void run() {
+                        // TODO Auto-generated method stub
+                        MyFauctionFragment.this.adapter = new MyPagerAdapter(getFragmentManager());
+                        viewPager.setAdapter(MyFauctionFragment.this.adapter);
+                        tabs = (PagerSlidingTabStrip) viewHolder.findViewById(R.id.tabs);
+                        tabs.setViewPager(viewPager);
+                        tabs.setDividerColor(0xFFFFFF);
 
 
-                }
-            }, 100);
-        }else{
-            tabs.setScrollOffset(0);
-            viewPager.setCurrentItem(0);
+                    }
+                }, 100);
+            }else{
+                tabs.setScrollOffset(0);
+                viewPager.setCurrentItem(0);
 
+            }
         }
+
 
 
 

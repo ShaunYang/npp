@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.squareup.otto.Subscribe;
@@ -22,6 +23,7 @@ import com.yintai.common.util.SystemUtil;
 import com.yintai.common.util.ToastUtil;
 import com.zhuoyi.fauction.MobileManagerApplication;
 import com.zhuoyi.fauction.R;
+import com.zhuoyi.fauction.config.Common;
 import com.zhuoyi.fauction.config.ConfigParams;
 import com.zhuoyi.fauction.config.ConfigUserManager;
 import com.zhuoyi.fauction.event.BusProvider;
@@ -124,6 +126,12 @@ public class MainActivity extends FragmentActivity {
 //        manager.beginTransaction().show(homeFragment).commit();
     }
 
+    @Override
+    protected void onRestart() {
+        //mTabHost.setCurrentTab(Common.home_tab);
+        super.onRestart();
+    }
+
     /**
      * 给Tab按钮设置图标和文字
      */
@@ -139,14 +147,14 @@ public class MainActivity extends FragmentActivity {
         return view;
     }
 
-    @Override
+   /* @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
             goback();
             return true;
         }
         return super.onKeyDown(keyCode, event);
-    }
+    }*/
 
     private void goback() {
         long currentTime = System.currentTimeMillis();
@@ -168,6 +176,37 @@ public class MainActivity extends FragmentActivity {
     private void appExit(){
 
         memberLoginOutPost();
+
+    }
+
+    // 退出时间
+
+    private long currentBackPressedTime = 0;
+
+    // 退出间隔
+
+    private static final int BACK_PRESSED_INTERVAL = 2000;
+
+    //重写onBackPressed()方法,继承自退出的方法
+
+    @Override
+    public void onBackPressed() {
+
+        // 判断时间间隔
+
+        if (System.currentTimeMillis()- currentBackPressedTime > BACK_PRESSED_INTERVAL) {
+
+            currentBackPressedTime = System.currentTimeMillis();
+
+            Toast.makeText(this, "再按一次返回键退出程序", Toast.LENGTH_SHORT).show();
+
+        } else {
+
+            // 退出
+            memberLoginOutPost();
+           // finish();
+
+        }
 
     }
 
@@ -206,8 +245,8 @@ public class MainActivity extends FragmentActivity {
                             AppServerConfig.destoryFactory();//销毁工厂*/
                                     //ConfigUserManager.setAlreadyLogin(MainActivity.this, false);
 
-                                    finish();
-                                    ((MobileManagerApplication)MobileManagerApplication.getInstance()).exit(MainActivity.this);
+                                    ((MobileManagerApplication)MobileManagerApplication.getInstance()).exit(getApplicationContext());
+                                    //((MobileManagerApplication)MobileManagerApplication.getInstance()).exit(MainActivity.this);
 
 
                                 }

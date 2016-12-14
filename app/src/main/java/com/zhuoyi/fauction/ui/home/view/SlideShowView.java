@@ -28,10 +28,12 @@ import com.squareup.picasso.Picasso;
 import com.yintai.DatabaseManager;
 import com.yintai.common.util.Logger;
 import com.zhuoyi.fauction.R;
+import com.zhuoyi.fauction.config.Common;
 import com.zhuoyi.fauction.config.ConfigUserManager;
 import com.zhuoyi.fauction.model.MainBanner;
 import com.zhuoyi.fauction.model.User;
 import com.zhuoyi.fauction.net.Constant;
+import com.zhuoyi.fauction.ui.category.activity.CategoryDoingTabActivity;
 import com.zhuoyi.fauction.ui.home.activity.ProductFauctionDetailDoingActivity;
 import com.zhuoyi.fauction.ui.home.activity.ProductFauctionDetailEndActivity;
 import com.zhuoyi.fauction.ui.home.activity.ProductFauctionDetailPreActivity;
@@ -214,7 +216,7 @@ public class SlideShowView extends FrameLayout {
                     public void onClick(View v) {
                         //判断跳转
                         MainBanner mainBanner = mainBannerList.get(position);
-                        if(mainBanner.getId()>0){
+                        if(mainBanner.getType()==1){//跳转品种页
                             int status = mainBanner.getStatus();
                             if (status == 1) {
                                 Intent intent = new Intent(context, ProductFauctionDetailPreActivity.class);
@@ -231,7 +233,14 @@ public class SlideShowView extends FrameLayout {
                                 intent.putExtra("productId", mainBanner.getId());
                                 context.startActivity(intent);
                             }
-                        }else{
+                        } else if(mainBanner.getType()==2){
+                            //跳转列表页面
+                            Intent intent = new Intent();
+                            intent.putExtra("tab",mainBanner.getId()+"");
+                            Common.tab=mainBanner.getId()+"";
+                            intent.setClass(context, CategoryDoingTabActivity.class);
+                            context.startActivity(intent);
+                        }else if(mainBanner.getType()==3){
                             //跳转H5页面
                             Intent intent=new Intent(context, WebShowActivity.class);
                             intent.putExtra("url",mainBanner.getUrl());

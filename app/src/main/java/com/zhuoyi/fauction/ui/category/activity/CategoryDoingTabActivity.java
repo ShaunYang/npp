@@ -97,13 +97,16 @@ public class CategoryDoingTabActivity extends BaseActivity {
         fcategoryDoListFragment.setOrder(2);
         allCategory.add(first);
         categoryDoListFragments.add(fcategoryDoListFragment);*/
-        for(Category category:mCategories){
-            CategoryDoListFragment categoryDoListFragment=new CategoryDoListFragment();
-            categoryDoListFragment.setCategory(category);
-            categoryDoListFragment.setOrder(2);
-            categoryDoListFragments.add(categoryDoListFragment);
-            allCategory.add(category);
+        if(mCategories!=null){
+            for(Category category:mCategories){
+                CategoryDoListFragment categoryDoListFragment=new CategoryDoListFragment();
+                categoryDoListFragment.setCategory(category);
+                categoryDoListFragment.setOrder(2);
+                categoryDoListFragments.add(categoryDoListFragment);
+                allCategory.add(category);
+            }
         }
+
         //viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
         // tabs = (PagerSlidingTabStrip)findViewById(R.id.tabs);
@@ -127,24 +130,27 @@ public class CategoryDoingTabActivity extends BaseActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
 
                 TextView tv = (TextView)view;
-                tv.setTextColor(getResources().getColor(R.color.white));    //设置颜色
+                if(tv!=null){
+                    tv.setTextColor(getResources().getColor(R.color.white));    //设置颜色
 
-                tv.setTextSize(22);    //设置大小
+                    tv.setTextSize(22);    //设置大小
 
-                tv.setGravity(Gravity.CENTER);   //设置居中
-                if(position==0){
+                    tv.setGravity(Gravity.CENTER);   //设置居中
+                    if(position==0){
 
-                    Intent intent=new Intent(CategoryDoingTabActivity.this,CategoryPreTabActivity.class);
-                    startActivity(intent);
-                    finish();
-                }else if(position==1){
+                        Intent intent=new Intent(CategoryDoingTabActivity.this,CategoryPreTabActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else if(position==1){
 
-                } else if(position==2){
+                    } else if(position==2){
 
-                    Intent intent=new Intent(CategoryDoingTabActivity.this,CategoryEndTabActivity.class);
-                    startActivity(intent);
-                    finish();
+                        Intent intent=new Intent(CategoryDoingTabActivity.this,CategoryEndTabActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent){}

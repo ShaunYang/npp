@@ -187,8 +187,11 @@ public class CategoryPreListFragment extends Fragment implements View.OnClickLis
                                 public void onResponse(String response) {
 
                                     Logger.i(TAG + "45646456456====", response);
-                                    if (isFirst)
-                                        ((CategoryPreTabActivity) getActivity()).dismiss();
+                                    if (isFirst) {
+                                        if (((CategoryPreTabActivity) getActivity()) != null) {
+                                            ((CategoryPreTabActivity) getActivity()).dismiss();
+                                        }
+                                    }
 
                                     if (isFlash)
                                         fauctionDos = new ArrayList<FauctionDo>();
@@ -262,8 +265,11 @@ public class CategoryPreListFragment extends Fragment implements View.OnClickLis
                                 public void onResponse(String response) {
 
                                     Logger.i(TAG+"45646456456====",response);
-                                    if(isFirst)
-                                        ((CategoryPreTabActivity)getActivity()).dismiss();
+                                    if (isFirst) {
+                                        if (((CategoryPreTabActivity) getActivity()) != null) {
+                                            ((CategoryPreTabActivity) getActivity()).dismiss();
+                                        }
+                                    }
 
                                     if(isFlash)
                                         fauctionDos = new ArrayList<FauctionDo>();

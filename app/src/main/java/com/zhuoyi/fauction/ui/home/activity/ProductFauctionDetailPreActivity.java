@@ -75,10 +75,10 @@ public class ProductFauctionDetailPreActivity extends BaseActivity {
     @Bind(R.id.isbaoliu) TextView isbaoliu;
     @Bind(R.id.tx_txt) TextView tx_txt;
     @Bind(R.id.yanshizhouqi) TextView yanshizhouqi;
-    @Bind(R.id.jiangjiafudu) TextView jiangjiafudu;
+    //@Bind(R.id.jiangjiafudu) TextView jiangjiafudu;
     @Bind(R.id.kaipaishijian)
     TextView kaipaishijian;
-   // @Bind(R.id.jieshushijian) TextView jieshushijian;
+    @Bind(R.id.jieshushijian) TextView jieshushijian;
     @Bind(R.id.price_record_icon)
     ImageView priceRecordIcon;
     @Bind(R.id.fauction_record) TextView fauctionRecord;
@@ -87,9 +87,9 @@ public class ProductFauctionDetailPreActivity extends BaseActivity {
     @Bind(R.id.shoot_time) TextView shootTime;
     @Bind(R.id.paimairecycleview)
     ListView paimairecycleview;
-    @Bind(R.id.tabs) PagerSlidingTabStrip tabs;
-    @Bind(R.id.viewPagers)
-    ViewPager viewPagers;
+    @Bind(R.id.id_stickynavlayout_indicator) PagerSlidingTabStrip tabs;
+    @Bind(R.id.id_stickynavlayout_viewpager)
+    CustomViewPager viewPagers;
     @Bind(R.id.tixing)
     LinearLayout tixing;
     @Bind(R.id.price_state) ImageView priceState;
@@ -139,6 +139,8 @@ public class ProductFauctionDetailPreActivity extends BaseActivity {
 
     //
     boolean isTx=false;
+
+    String cownStr;
 
     Handler handler=new Handler();
     Runnable runnable=new Runnable() {
@@ -370,7 +372,7 @@ public class ProductFauctionDetailPreActivity extends BaseActivity {
         proId = intent.getIntExtra("productId", 0);
         Common.proId=proId;
         detailFirstPagePost(proId);
-        detailSecondPagePost(proId);
+       // detailSecondPagePost(proId);
         //auctionDetailRecordPost(proId);
 
 
@@ -458,7 +460,7 @@ public class ProductFauctionDetailPreActivity extends BaseActivity {
                             if (productDetail2 != null) {
                                 Common.productDetail2 = productDetail2;
                                 viewPagers.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-                                tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+                                tabs = (PagerSlidingTabStrip) findViewById(R.id.id_stickynavlayout_indicator);
                                 tabs.setViewPager(viewPagers);
                                 tabs.setDividerColor(0xFFFFFF);
                                 viewPagers.setCurrentItem(0);
@@ -539,12 +541,13 @@ public class ProductFauctionDetailPreActivity extends BaseActivity {
                                 isTx = false;
                             }
                             yanshizhouqi.setText(data.getDelayed()+"分钟/次");
-                            jiangjiafudu.setText("￥"+data.getCut_price()+"/"+data.getPrice_cycle()+"分钟");
+                            //cownStr=data.getDelayed();
+                            //jiangjiafudu.setText("￥"+data.getCut_price()+"/"+data.getPrice_cycle()+"分钟");
                             price_fd=Float.parseFloat(data.getCut_price());
                             kaipaishijian.setText(data.getShoot_time());
                             //定时时间到跳转正在进行
                             handler.postDelayed(runnable,getDistanceMills(data.getShoot_time(),getSystemDate()));
-                            // jieshushijian.setText(data.getEnd_time());
+                            jieshushijian.setText(data.getEnd_time());
                             login_status=data.getLogin_status();
 //                        //未交保证金
 //                        if(login_status==-1){
@@ -559,6 +562,31 @@ public class ProductFauctionDetailPreActivity extends BaseActivity {
                                 mImgBannerUrl.add(pictureBean.getPic_name());
                             }
                             topAd.setView(mImgBannerUrl.toArray(new String[mImgBannerUrl.size()]));
+                            viewPagers.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+                            tabs = (PagerSlidingTabStrip) findViewById(R.id.id_stickynavlayout_indicator);
+                            tabs.setViewPager(viewPagers);
+                            tabs.setDividerColor(0xFFFFFF);
+                            viewPagers.setCurrentItem(0);
+                            tabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                                @Override
+                                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                                }
+
+                                @Override
+                                public void onPageSelected(int position) {
+                                    viewPagers.resetHeight(position);
+                                }
+
+                                @Override
+                                public void onPageScrollStateChanged(int state) {
+
+                                }
+                            });
+                            viewPagers.resetHeight(0);
+                            DialogUtil.dismiss();
+                        }else{
+                            DialogUtil.dismiss();
                         }
 
 
@@ -704,15 +732,15 @@ public class ProductFauctionDetailPreActivity extends BaseActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    fauctionDetailFragment = new FauctionDetailFragment();
+                    fauctionDetailFragment = new FauctionDetailFragment(viewPagers);
                    // mainCategory.setTitle(title[0]);
                     return fauctionDetailFragment;
                 case 1:
-                    fauctionKnowFragment = new FauctionKnowFragment();
+                    fauctionKnowFragment = new FauctionKnowFragment(viewPagers);
                    // mainCategory.setTitle(title[1]);
                     return fauctionKnowFragment;
                 case 2:
-                    fauctionStepFragment = new FauctionStepFragment();
+                    fauctionStepFragment = new FauctionStepFragment(viewPagers);
                     //mainCategory.setTitle(title[2]);
                     return fauctionStepFragment;
 

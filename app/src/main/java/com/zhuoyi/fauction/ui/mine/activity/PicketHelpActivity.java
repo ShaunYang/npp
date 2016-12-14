@@ -8,6 +8,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.zhuoyi.fauction.R;
+import com.zhuoyi.fauction.net.Constant;
 import com.zhuoyi.fauction.ui.BaseActivity;
 
 import butterknife.Bind;
@@ -112,7 +113,7 @@ public class PicketHelpActivity extends BaseActivity {
 		webview.getSettings().setAllowFileAccess(true);
 
 		// 加载index.html
-		webview.loadUrl("http://api.nongpaipai.cn/v2/new/index/id/6");
+		webview.loadUrl(Constant.PICKET_HELP);
 
 	}
 

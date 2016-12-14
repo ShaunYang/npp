@@ -108,7 +108,6 @@ public class PriceRecordActivity extends BaseActivity implements XListView.IXLis
 						.addParams("user_id", ConfigUserManager.getUserId(PriceRecordActivity.this))
 						.addParams("id", Common.proId+"")
 						.addParams("page", String.valueOf(pageSize))
-						.addParams("type",type+"")
 						.build()
 						.execute(new StringCallback() {
 							@Override

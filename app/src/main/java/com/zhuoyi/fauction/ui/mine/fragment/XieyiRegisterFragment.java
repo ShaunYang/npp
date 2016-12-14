@@ -63,7 +63,7 @@ public class XieyiRegisterFragment extends Fragment  {
         webview.getSettings().setAllowFileAccess(true);
 
         // 加载index.html
-        webview.loadUrl("http://api.nongpaipai.cn/v1/new/index/id/1");
+        webview.loadUrl(Constant.REGIST_XIEYI);
     }
 
     @Override
